@@ -29,7 +29,9 @@
             android:layout_width="30dp"
             android:layout_height="35dp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_baseline_menu_24" />
+            android:src="@drawable/ic_baseline_menu_24"
+
+            />
 
         <TextView
             android:id="@+id/txtTitle"
@@ -57,7 +59,6 @@
         />
 
 
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
 
         android:layout_width="411dp"
@@ -71,6 +72,8 @@
         app:layout_constraintVertical_bias="1.0"
         app:menu="@menu/bottom_nav_menu"
         />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

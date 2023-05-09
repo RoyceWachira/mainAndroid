@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bb"
     tools:context=".ProfileFragment">
 
@@ -31,13 +32,123 @@
             android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
-    <TextView
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Profile Fragment"
-        android:textSize="20sp"
-        android:id="@+id/txtProfile"
-        />
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_gravity="fill"
+        android:layout_margin="15dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="510dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        >
+
+        <LinearLayout
+            android:layout_width="140dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="110dp"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UserName"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/design_default_color_primary"
+                />
+
+
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="250dp"
+            android:layout_marginRight="20dp"
+            android:drawableLeft="@drawable/ic_baseline_edit"
+            android:text="Edit"
+            android:textAllCaps="false"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            android:src="@drawable/ic_image_person_foreground"
+            android:padding="5dp"
+            app:strokeWidth="3dp"
+            app:strokeColor="@color/design_default_color_primary"
+            />
+
+
+    </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_gravity="fill"
+            android:layout_margin="15dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginBottom="390dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            >
+
+            <LinearLayout
+                android:layout_width="160dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="110dp"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Logout"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/design_default_color_primary"
+                    />
+
+
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/logout"
+                android:padding="20dp"
+                app:strokeWidth="3dp"
+                app:strokeColor="@color/design_default_color_primary"
+                app:tint="@color/design_default_color_primary" />
+
+
+        </androidx.cardview.widget.CardView>
+
+    </GridLayout>
 
 </FrameLayout>

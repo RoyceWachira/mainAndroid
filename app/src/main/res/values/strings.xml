@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MyApp</string>
     <string name="select">Select Gender</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_menu">Menu</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -31,4 +31,7 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="join_chama">Join Chama</string>
+    <string name="system_flow_type">System flow type</string>
+    <string name="contribution_period_in_days">Contribution Period (In Days)</string>
 </resources>

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bb"
     tools:context=".HomeFragment">
     <LinearLayout
@@ -30,13 +31,255 @@
             android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_gravity="fill"
+            android:layout_margin="15dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="300dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:orientation="vertical"
+
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="80dp"
+                    android:text="No Chamas Joined Yet"
+                    android:textAlignment="center"
+                    android:textColor="#5D3FD3"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+    </GridLayout>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:rowCount="3"
+        android:columnCount="2"
+        >
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/card2"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_gravity="fill"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="15dp"
+            android:layout_marginTop="400dp"
+            android:layout_marginBottom="100dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chamas"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textColor="#5D3FD3"
+                    android:textSize="20sp"
+                    android:layout_marginTop="80dp"
+                    />
+
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/card3"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_gravity="fill"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="15dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="400dp"
+            android:layout_marginBottom="100dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Users"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textColor="#5D3FD3"
+                    android:textSize="20sp"
+                    android:layout_marginTop="80dp"
+                    />
+
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+    </GridLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/label2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Chama"
+            android:visibility="invisible"
+            android:background="@color/design_default_color_primary"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:layout_marginTop="495dp"
+            android:layout_marginLeft="220dp" />
+
+        <TextView
+            android:id="@+id/label3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Join Chama"
+            android:visibility="invisible"
+            android:textColor="#FFFFFF"
+            android:background="@color/design_default_color_primary"
+            android:textSize="13sp"
+            android:layout_marginTop="560dp"
+            android:layout_marginLeft="232dp" />
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Home Fragment"
-        android:textSize="20sp"
-        android:id="@+id/txtHome"
+        android:layout_marginTop="600dp"
+        android:layout_marginLeft="15dp"
+        android:drawableLeft="@drawable/ic_baseline_add_24"
+        android:text="@string/join_chama"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:padding="15dp"
         />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_baseline_add_24"
+        app:tint="@android:color/white"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="310dp"
+        android:layout_marginTop="610dp"
+        app:backgroundTint="@color/design_default_color_primary"
+        app:shapeAppearanceOverlay="@style/fab_square"
+        android:contentDescription="Chama Actions"
+
+
+
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingButton2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="invisible"
+        android:src="@drawable/ic_baseline_group_add_24"
+        app:tint="@android:color/white"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="310dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="480dp"
+        app:backgroundTint="@color/design_default_color_primary"
+        app:shapeAppearanceOverlay="@style/fab_square"
+        android:contentDescription="Create Chama"
+
+
+
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingButton3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="invisible"
+        android:src="@drawable/ic_baseline_group_24"
+        app:tint="@android:color/white"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="310dp"
+        android:layout_marginTop="545dp"
+        android:layout_marginBottom="00dp"
+        app:backgroundTint="@color/design_default_color_primary"
+        app:shapeAppearanceOverlay="@style/fab_square"
+        android:contentDescription="Join Chama"
+
+
+
+        />
+
 
 </FrameLayout>

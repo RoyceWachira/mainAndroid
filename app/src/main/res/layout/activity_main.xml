@@ -25,10 +25,9 @@
 
 
     <EditText
-        android:id="@+id/editTextUsername"
+        android:id="@+id/loginUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints=""
         android:background="@drawable/input_bg"
         android:drawableLeft="@drawable/ic_person"
         android:drawablePadding="10dp"
@@ -43,7 +42,7 @@
 
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/loginPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/input_bg"
