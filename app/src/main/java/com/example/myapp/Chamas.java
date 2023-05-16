@@ -3,31 +3,33 @@ package com.example.myapp;
 import com.google.gson.annotations.SerializedName;
 
 public class Chamas {
-    @SerializedName("chamaId") private int chamaId;
-    @SerializedName("chamaName") private int chamaName;
-    @SerializedName("chamaDescripion") private int chamaDescripion;
 
-    public Chamas(int chamaId, String chamaName, String chamaDescription) {
+    @SerializedName("chama_name") private String chamaName;
+    @SerializedName("chama_description") private String chamaDescription;
+
+    public Chamas( String chamaName, String chamaDescription) {
+        this.chamaName= chamaName;
+        this.chamaDescription=chamaDescription;
     }
 
-    public int getChamaId() {
-        return chamaId;
-    }
 
-    public int getChamaName() {
+
+    public String getChamaName() {
         return chamaName;
     }
 
-    public int getChamaDescripion() {
-        return chamaDescripion;
+    public String getChamaDescription() {
+        return chamaDescription;
     }
 
-    public void setChamaId(int chamaId) {
-    }
+
 
     public void setChamaName(String chamaName) {
+        this.chamaName=chamaName;
+
     }
 
     public void setChamaDescription(String chamaDescription) {
+        this.chamaDescription=chamaDescription;
     }
 }

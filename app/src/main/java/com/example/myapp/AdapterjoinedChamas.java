@@ -14,12 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.MyViewHolder> {
-
+public class AdapterjoinedChamas extends RecyclerView.Adapter<AdapterSearch.MyViewHolder>{
     private List<Chamas> chamasList;
     private Context context;
 
-    public AdapterSearch(List<Chamas>chamasList,Context context){
+    public AdapterjoinedChamas(List<Chamas>chamasList,Context context){
         this.chamasList=chamasList;
         this.context=context;
     }
@@ -30,13 +29,13 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.MyViewHold
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.chamas,parent,false);
-        return new MyViewHolder(view);
+    public AdapterSearch.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.chamas_joined,parent,false);
+        return new AdapterSearch.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(AdapterSearch.MyViewHolder holder, int position) {
 
         holder.chamaName.setText(chamasList.get(position).getChamaName());
         holder.chamaDescription.setText(chamasList.get(position).getChamaDescription());
@@ -45,7 +44,7 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.MyViewHold
     @Override
     public int getItemCount() {
         int itemCount = chamasList.size();
-        Log.d("AdapterSearch", "Chamas List Size: " + itemCount);
+        Log.d("Adapter", "Chamas List Size: " + itemCount);
         return itemCount;
 
     }
@@ -56,10 +55,12 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.MyViewHold
         Button button;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            button= itemView.findViewById(R.id.requestButton);
+            button= itemView.findViewById(R.id.setButton);
             cardView=itemView.findViewById(R.id.cardJoinChama);
             chamaName= itemView.findViewById(R.id.chamaName);
             chamaDescription= itemView.findViewById(R.id.chamaDescription);
         }
     }
 }
+
+

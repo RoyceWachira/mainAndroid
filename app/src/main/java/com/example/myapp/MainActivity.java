@@ -3,6 +3,7 @@ package com.example.myapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -57,8 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final String password = loginPassword.getText().toString().trim();
         progressDialog.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.URL_LOGIN,
-                new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.URL_LOGIN, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         progressDialog.dismiss();
@@ -75,8 +75,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 int userId = jsonObject.getInt("userId");
                                 String username = jsonObject.getString("username");
                                 String role = jsonObject.getString("role");
+                                String sId= jsonObject.getString("sId");
 
-                                SharedPrefManager.getInstance(getApplicationContext()).userLogin(userId, username, role);
+                                SharedPrefManager.getInstance(getApplicationContext()).userLogin(userId, username, role,sId);
 
                                 showToast(message, false); // Show success message with green background color
                                 startActivity(new Intent(MainActivity.this, HomeActivity.class));
@@ -91,7 +92,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.dismiss();
-                        showToast("Error occurred: " + error.getMessage(), true); // Show error message with red background color
+                        String errorMessage = error != null && error.getMessage() != null ? error.getMessage() : "Unknown error";
+                        Log.e("LoginError", "Error occurred", error);
+                        showToast("Error occurred: " + errorMessage, true);
                     }
                 }) {
             @Override

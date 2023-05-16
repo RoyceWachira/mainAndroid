@@ -11,6 +11,7 @@ public class SharedPrefManager {
     private static final String KEY_USER_NAME= "username";
     private static final String KEY_USER_ID= "userId";
     private static final String KEY_USER_ROLE="role";
+    private static final String SESSION_KEY= "sId";
 
     private SharedPrefManager(Context context) {
         ctx = context;
@@ -23,7 +24,7 @@ public class SharedPrefManager {
         return instance;
     }
 
-    public void userLogin(int userId, String username, String role) {
+    public void userLogin(int userId, String username, String role,String sId) {
 
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -31,6 +32,7 @@ public class SharedPrefManager {
         editor.putString(KEY_USER_ID, String.valueOf(userId));
         editor.putString(KEY_USER_NAME,username);
         editor.putString(KEY_USER_ROLE,role);
+        editor.putString(SESSION_KEY,sId);
         editor.apply();
 
     }
@@ -53,6 +55,20 @@ public class SharedPrefManager {
         return true;
     }
 
+    public String getUserId() {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_USER_ID, null);
+    }
+
+    public String getKeyUserName() {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_USER_NAME, null);
+    }
+
+    public int sessionInfo() {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getInt(SESSION_KEY, -1);
+    }
 
 
 }

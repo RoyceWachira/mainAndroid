@@ -124,7 +124,7 @@
         android:background="@drawable/input_bg"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
         <AutoCompleteTextView
-            android:id="@+id/autoComplete_txt"
+            android:id="@+id/autoComplete_txtPeriod"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorLink="@color/white"
@@ -144,7 +144,7 @@
         android:background="@drawable/input_bg"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
         <AutoCompleteTextView
-            android:id="@+id/autoComplete_txtPeriod"
+            android:id="@+id/autoComplete_txtFlow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorLink="@color/white"

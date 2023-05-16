@@ -1,13 +1,13 @@
 package com.example.myapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -77,25 +77,32 @@ public class JoinChamaFragment extends Fragment {
     private List<Chamas> chamasList;
     private List<Chamas> filteredChamasList; // Add a new list to store filtered chamas
     private AdapterSearch adapterSearch;
-    ProgressBar progressBar;
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_join_chama, container, false);
 
-        progressBar = view.findViewById(R.id.progressBar);
+
         recyclerView = view.findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        chamasList = new ArrayList<>(); // Initialize the chamasList
-        filteredChamasList = new ArrayList<>(); // Initialize the filteredChamasList
+        chamasList = new ArrayList<>();
+        filteredChamasList = new ArrayList<>();
 
         adapterSearch = new AdapterSearch(chamasList, getContext());
         recyclerView.setAdapter(adapterSearch);
 
-        fetchChamas();
+
+        if (SharedPrefManager.getInstance(getContext()).isLoggedIn()) {
+            System.out.println(true);
+            fetchChamasNotJoined();
+
+        }
 
         SearchView searchView = view.findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -106,6 +113,8 @@ public class JoinChamaFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                Log.d("List",chamasList.toString());
+                Log.d("Search",newText);
                 filterChamasList(newText);
                 return true;
             }
@@ -114,51 +123,54 @@ public class JoinChamaFragment extends Fragment {
         return view;
     }
 
-    public void fetchChamas() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.URL_ALL_CHAMAS, new Response.Listener<String>() {
+    private void fetchChamasNotJoined() {
+
+        // Retrieve the user's ID or any identifier needed to fetch joined chamas
+
+        String userId = null;
+        if (SharedPrefManager.getInstance(getContext()).isLoggedIn()) {
+
+            userId = SharedPrefManager.getInstance(getContext()).getUserId();
+
+        } else {
+
+        }
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.URL_CHAMAS_NOT_JOINED + "?user_id=" + userId, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Context context = getContext(); // Get the fragment's context
 
+                Log.d("Response", response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
 
-                    // Check if the backend response indicates a successful error
+                    // Check if the backend response indicates a successful request
                     if (jsonObject.getBoolean("error")==false) {
-                        // Display a success message to the user
-                        Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
-
-                        // Retrieve the chamas array from the response
                         JSONArray chamasArray = jsonObject.getJSONArray("chamas");
 
-                        // Create a list to store the chamas
-                        List<Chamas> chamasList = new ArrayList<>();
+                        chamasList.clear();
 
-                        // Iterate over the chamas array and create Chamas objects
-                        for (int i = 0; i < chamasArray.length(); i++) {
-                            JSONObject chamaObject = chamasArray.getJSONObject(i);
-                            int chamaId = chamaObject.getInt("chamaId");
-                            String chamaName = chamaObject.getString("chamaName");
-                            String chamaDescription = chamaObject.getString("chamaDescription");
+                        // Check if the user has joined any chamas
+                        if (chamasArray.length() > 0) {
+                            TextView noChamasTextView = getView().findViewById(R.id.unjoinedChamas);
+                            noChamasTextView.setVisibility(View.GONE);
 
-                            // Create a Chamas object and add it to the list
-                            Chamas chamas = new Chamas(chamaId, chamaName, chamaDescription);
-                            chamasList.add(chamas);
-                        }
+                            for (int i = 0; i < chamasArray.length(); i++) {
+                                JSONObject chamaObject = chamasArray.getJSONObject(i);
 
-                        // Pass the chamas list to the adapter and set it to the RecyclerView
-                        AdapterSearch adapter = new AdapterSearch(chamasList, context);
-                        recyclerView.setAdapter(adapter);
-                    } else {
-                        // Display an error message to the user
-                        Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                                String chamaName = chamaObject.getString("chama_name");
+                                String chamaDescription = chamaObject.getString("chama_description");
 
-                        // Check if the error message indicates invalid credentials
-                        if (jsonObject.getString("message").equals("Invalid Username or Password")) {
-                            // Perform logout operation and redirect to the login screen
-                            SharedPrefManager.getInstance(context).logout();
-                            startActivity(new Intent(context, MainActivity.class));
-                            getActivity().finish();
+                                Chamas chamas = new Chamas(chamaName, chamaDescription);
+                                chamasList.add(chamas);
+                            }
+
+                            adapterSearch.setChamasList(chamasList);
+                            adapterSearch.notifyDataSetChanged();
+                        } else {
+
+                            TextView noChamasTextView = getView().findViewById(R.id.unjoinedChamas);
+                            noChamasTextView.setVisibility(View.VISIBLE);
                         }
                     }
                 } catch (JSONException e) {
@@ -168,22 +180,28 @@ public class JoinChamaFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Context context = getContext(); // Get the fragment's context
+                Context context = getContext();
                 Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 
-        Context context = getContext(); // Get the fragment's context
+        Context context = getContext();
         RequestHandler.getInstance(context).addToRequestQueue(stringRequest);
     }
 
     private void filterChamasList(String query) {
         filteredChamasList.clear();
 
-        for (Chamas chamas : chamasList) {
-            String chamaName = String.valueOf(chamas.getChamaName());
-            if (chamaName != null && chamaName.toLowerCase().contains(query.toLowerCase())) {
-                filteredChamasList.add(chamas);
+        if (query.isEmpty()) {
+            // If the search query is empty, show all chamas
+            filteredChamasList.addAll(chamasList);
+        } else {
+            // Filter chamas based on the search query
+            for (Chamas chamas : chamasList) {
+                String chamaName = chamas.getChamaName();
+                if (chamaName != null && chamaName.toLowerCase().contains(query.toLowerCase())) {
+                    filteredChamasList.add(chamas);
+                }
             }
         }
 
@@ -193,4 +211,9 @@ public class JoinChamaFragment extends Fragment {
 
 
 
-}
+
+
+
+
+
+            }
