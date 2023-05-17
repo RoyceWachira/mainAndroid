@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Home"
+        android:id="@+id/chamaHome"
+        android:icon="@drawable/ic_home"
+        />
+    <item
+        android:title="Notifications"
+        android:id="@+id/chamaNotifications"
+        android:icon="@drawable/ic_baseline_notifications_24"
+        android:iconTint="@color/black"
+        />
+    <item
+        android:title="Settings"
+        android:id="@+id/chamaSettings"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:iconTint="@color/black"
+        />
+
+</menu>

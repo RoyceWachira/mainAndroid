@@ -1,6 +1,7 @@
 package com.example.myapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class AdapterjoinedChamas extends RecyclerView.Adapter<AdapterSearch.MyViewHolder>{
+public class AdapterjoinedChamas extends RecyclerView.Adapter<AdapterjoinedChamas.MyViewHolder>{
     private List<Chamas> chamasList;
     private Context context;
 
@@ -29,16 +30,29 @@ public class AdapterjoinedChamas extends RecyclerView.Adapter<AdapterSearch.MyVi
     }
 
     @Override
-    public AdapterSearch.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AdapterjoinedChamas.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.chamas_joined,parent,false);
-        return new AdapterSearch.MyViewHolder(view);
+        return new AdapterjoinedChamas.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(AdapterSearch.MyViewHolder holder, int position) {
+    public void onBindViewHolder(AdapterjoinedChamas.MyViewHolder holder, int position) {
 
         holder.chamaName.setText(chamasList.get(position).getChamaName());
         holder.chamaDescription.setText(chamasList.get(position).getChamaDescription());
+
+        holder.btnSet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent = new Intent(context, ChamaActivity.class);
+                intent.putExtra("chamaId", chamasList.get(holder.getAdapterPosition()).getChamaId());
+                intent.putExtra("chamaName", chamasList.get(holder.getAdapterPosition()).getChamaName());
+                intent.putExtra("chamaDescription", chamasList.get(holder.getAdapterPosition()).getChamaDescription());
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -52,10 +66,10 @@ public class AdapterjoinedChamas extends RecyclerView.Adapter<AdapterSearch.MyVi
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
         TextView chamaName,chamaDescription;
-        Button button;
+        Button btnSet;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            button= itemView.findViewById(R.id.setButton);
+            btnSet= itemView.findViewById(R.id.setButton);
             cardView=itemView.findViewById(R.id.cardJoinChama);
             chamaName= itemView.findViewById(R.id.chamaName);
             chamaDescription= itemView.findViewById(R.id.chamaDescription);

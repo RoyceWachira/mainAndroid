@@ -80,11 +80,9 @@ public class JoinChamaFragment extends Fragment {
 
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_join_chama, container, false);
-
 
         recyclerView = view.findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(getContext());
@@ -96,7 +94,6 @@ public class JoinChamaFragment extends Fragment {
 
         adapterSearch = new AdapterSearch(chamasList, getContext());
         recyclerView.setAdapter(adapterSearch);
-
 
         if (SharedPrefManager.getInstance(getContext()).isLoggedIn()) {
             System.out.println(true);
@@ -160,8 +157,9 @@ public class JoinChamaFragment extends Fragment {
 
                                 String chamaName = chamaObject.getString("chama_name");
                                 String chamaDescription = chamaObject.getString("chama_description");
+                                Integer chamaId= chamaObject.getInt("chama_id");
 
-                                Chamas chamas = new Chamas(chamaName, chamaDescription);
+                                Chamas chamas = new Chamas(chamaName, chamaDescription,chamaId);
                                 chamasList.add(chamas);
                             }
 
@@ -193,8 +191,10 @@ public class JoinChamaFragment extends Fragment {
         filteredChamasList.clear();
 
         if (query.isEmpty()) {
-            // If the search query is empty, show all chamas
             filteredChamasList.addAll(chamasList);
+            TextView noChamasTextView = getView().findViewById(R.id.unjoinedChamas);
+            noChamasTextView.setVisibility(View.GONE);
+
         } else {
             // Filter chamas based on the search query
             for (Chamas chamas : chamasList) {
@@ -207,11 +207,15 @@ public class JoinChamaFragment extends Fragment {
 
         adapterSearch.setChamasList(filteredChamasList);
         adapterSearch.notifyDataSetChanged();
+
+        if (filteredChamasList.isEmpty()) {
+            TextView noChamasTextView = getView().findViewById(R.id.unjoinedChamas);
+            noChamasTextView.setVisibility(View.VISIBLE);
+        } else {
+            TextView noChamasTextView = getView().findViewById(R.id.unjoinedChamas);
+            noChamasTextView.setVisibility(View.GONE);
+        }
     }
-
-
-
-
 
 
 

@@ -51,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text="No available chamas currently"
+        android:text="No chamas currently available"
         android:layout_marginTop="10dp"
         android:textAlignment="center"
         android:textStyle="bold"

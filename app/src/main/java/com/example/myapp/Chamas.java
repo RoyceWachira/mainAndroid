@@ -6,10 +6,14 @@ public class Chamas {
 
     @SerializedName("chama_name") private String chamaName;
     @SerializedName("chama_description") private String chamaDescription;
+    @SerializedName("chama_id") private Integer chamaId;
 
-    public Chamas( String chamaName, String chamaDescription) {
+    private boolean requestMade;
+
+    public Chamas( String chamaName, String chamaDescription,Integer chamaId) {
         this.chamaName= chamaName;
         this.chamaDescription=chamaDescription;
+        this.chamaId=chamaId;
     }
 
 
@@ -18,10 +22,13 @@ public class Chamas {
         return chamaName;
     }
 
+    public Integer getChamaId() {
+        return chamaId;
+    }
+
     public String getChamaDescription() {
         return chamaDescription;
     }
-
 
 
     public void setChamaName(String chamaName) {
@@ -29,7 +36,19 @@ public class Chamas {
 
     }
 
+    public Integer setChamaId() {
+        return chamaId;
+    }
+
     public void setChamaDescription(String chamaDescription) {
         this.chamaDescription=chamaDescription;
+    }
+
+    public boolean isRequestMade() {
+        return requestMade;
+    }
+
+    public void setRequestMade(boolean requestMade) {
+        this.requestMade = requestMade;
     }
 }

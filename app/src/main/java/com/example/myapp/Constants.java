@@ -2,7 +2,7 @@ package com.example.myapp;
 
 public class Constants {
 
-    private static final String ROOT_URL="http://192.168.100.8/Api/";
+    private static final String ROOT_URL="http://192.168.100.5/Api/";
 
     public static final String URL_REGISTER= ROOT_URL+"register.php";
     public static final String URL_LOGIN= ROOT_URL+"login.php";
@@ -15,5 +15,6 @@ public class Constants {
     public static final String URL_UPDATE_USER= ROOT_URL+"updateUser.php";
     public static final String URL_CHAMAS_NOT_JOINED= ROOT_URL+"chamasNotJoined.php";
     public static final String URL_NEW_CHAMA= ROOT_URL+"chama.php";
+    public static final String URL_REQUEST_JOIN_CHAMA= ROOT_URL+ "joinchamarequest.php";
 
 }

@@ -1,7 +1,6 @@
 package com.example.myapp;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -165,13 +166,15 @@ public class CreateChamaFragment extends Fragment {
                     String message = jsonObject.getString("message");
 
                     if (error) {
-                        showToast(message, true); // Show error message with red background color
-                        Intent intent = new Intent(getActivity(), ChamaActivity.class);
-                        startActivity(intent);
-
+                        showToast(message, true);
                     } else {
-                        showToast(message, false); // Show success message with green background color
-
+                        showToast(message, false);
+                        HomeFragment homeFragment= new HomeFragment();
+                        FragmentManager fragmentManager = getParentFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.frame_layout, homeFragment);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

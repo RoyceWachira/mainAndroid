@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="toast_error_background">#FF0000</color>
     <color name="toast_success_background">#4CBB17</color>
+    <color name="requested">#A9A9A9</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#fff</color>
 </resources>

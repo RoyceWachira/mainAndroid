@@ -293,8 +293,9 @@ public class HomeFragment extends Fragment {
 
                                 String chamaName = chamaObject.getString("chama_name");
                                 String chamaDescription = chamaObject.getString("chama_description");
+                                Integer chamaId= chamaObject.getInt("chama_id");
 
-                                Chamas chamas = new Chamas(chamaName, chamaDescription);
+                                Chamas chamas = new Chamas(chamaName, chamaDescription,chamaId);
                                 joinedChamasList.add(chamas);
                             }
 

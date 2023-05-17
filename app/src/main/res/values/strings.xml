@@ -34,4 +34,5 @@
     <string name="join_chama">Join Chama</string>
     <string name="system_flow_type">System flow type</string>
     <string name="contribution_period_in_days">Contribution Period (In Days)</string>
+    <string name="ksh">Ksh.</string>
 </resources>
