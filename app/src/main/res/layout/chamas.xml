@@ -16,6 +16,7 @@
             android:layout_marginBottom="10dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
+            android:backgroundTint="@color/design_default_color_primary"
             >
 
             <LinearLayout
@@ -34,7 +35,7 @@
                     android:text="ChamaName"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textColor="@color/design_default_color_primary"
+                    android:textColor="@color/white"
                     />
 
                 <TextView
@@ -43,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:text="Description"
                     android:textSize="15sp"
-                    android:textColor="@color/design_default_color_primary"
+                    android:textColor="@color/white"
                     />
 
 
@@ -59,9 +60,12 @@
                 android:layout_marginRight="20dp"
                 android:drawableLeft="@drawable/ic_baseline_how_to_reg_24"
                 android:text="Request"
+                android:textColor="@color/design_default_color_primary"
                 android:textAllCaps="false"
                 android:textSize="13sp"
                 android:textStyle="bold"
+                android:backgroundTint="@color/white"
+                android:drawableTint="@color/design_default_color_primary"
                 />
 
 

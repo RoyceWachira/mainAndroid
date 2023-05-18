@@ -10,13 +10,12 @@
         android:title="Notifications"
         android:id="@+id/chamaNotifications"
         android:icon="@drawable/ic_baseline_notifications_24"
-        android:iconTint="@color/black"
         />
     <item
         android:title="Settings"
         android:id="@+id/chamaSettings"
         android:icon="@drawable/ic_baseline_settings_24"
-        android:iconTint="@color/black"
+
         />
 
 </menu>

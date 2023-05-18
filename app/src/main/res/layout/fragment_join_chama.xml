@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:padding="8dp"
-            android:text="iChama"
+            android:text="Join Chama"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
