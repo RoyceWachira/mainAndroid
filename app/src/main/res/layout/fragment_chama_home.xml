@@ -47,10 +47,10 @@
         android:layout_marginStart="9dp"
         android:padding="8dp"
         android:text="Hello"
-        android:textColor="@color/white"
+        android:textColor="@color/design_default_color_primary"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
         />
 
         <TextView
@@ -65,7 +65,7 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="50dp"
             />
 
         <TextView
@@ -74,13 +74,13 @@
             android:layout_height="wrap_content"
             android:layout_row="0"
             android:layout_column="0"
-            android:layout_marginStart="135dp"
+            android:layout_marginStart="9dp"
             android:padding="8dp"
             android:text="Welcome to"
-            android:textColor="@color/white"
+            android:textColor="@color/design_default_color_primary"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="70dp"
             />
 
         <TextView
@@ -89,13 +89,13 @@
             android:layout_height="wrap_content"
             android:layout_row="0"
             android:layout_column="0"
-            android:layout_marginStart="225dp"
+            android:layout_marginStart="98dp"
             android:padding="8dp"
             android:text="ChamaName"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="70dp"
             />
         <androidx.cardview.widget.CardView
             android:id="@+id/card1"
@@ -105,26 +105,20 @@
             android:layout_column="0"
             android:layout_gravity="fill"
             android:layout_margin="13dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="105dp"
             android:layout_marginBottom="490dp"
             android:backgroundTint="@color/design_default_color_primary"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
             >
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:gravity="left"
-                android:orientation="vertical"
-                >
 
                 <TextView
                     android:id="@+id/fundsView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp"
                     android:text="Total Funds"
                     android:textColor="@color/white"
                     android:textSize="20sp"
@@ -134,13 +128,23 @@
                     android:id="@+id/txtCurrency"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="12dp"
                     android:text="@string/ksh"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
-            </LinearLayout>
+            <TextView
+                android:id="@+id/txtFunds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:layout_marginLeft="45dp"
+                android:text="xxxx"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </androidx.cardview.widget.CardView>
 
@@ -175,6 +179,7 @@
             android:layout_gravity="fill"
             android:layout_margin="15dp"
             android:layout_marginTop="10dp"
+            android:clickable="true"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
@@ -237,6 +242,7 @@
             android:backgroundTint="@color/design_default_color_primary"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="10dp"
+            android:clickable="true"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
@@ -301,6 +307,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="90dp"
+            android:clickable="true"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
@@ -365,6 +372,7 @@
             android:layout_marginLeft="0dp"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="90dp"
+            android:clickable="true"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
@@ -378,7 +386,7 @@
                 >
 
                 <TextView
-                    android:id="@+id/usersCountTextView"
+                    android:id="@+id/txtLoansCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"

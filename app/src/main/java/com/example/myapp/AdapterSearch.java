@@ -86,7 +86,7 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.MyViewHold
     }
 
     private void requestToJoinChama(int position) {
-        int chamaId = chamasList.get(position).getChamaId();
+        String chamaId = chamasList.get(position).getChamaId();
         int userId = Integer.parseInt(SharedPrefManager.getInstance(context).getUserId());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.URL_REQUEST_JOIN_CHAMA+ "?chama_id=" + chamaId + "&user_id=" + userId, new Response.Listener<String>() {
                     @Override

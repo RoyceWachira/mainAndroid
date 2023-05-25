@@ -16,5 +16,10 @@ public class Constants {
     public static final String URL_CHAMAS_NOT_JOINED= ROOT_URL+"chamasNotJoined.php";
     public static final String URL_NEW_CHAMA= ROOT_URL+"chama.php";
     public static final String URL_REQUEST_JOIN_CHAMA= ROOT_URL+ "joinchamarequest.php";
-
+    public static final String URL_TOTAL_CHAMA_FUNDS= ROOT_URL+"getChamaTotalFunds.php";
+    public static final String URL_TOTAL_INDIVIDUAL_LOANS= ROOT_URL+"gettotalMemberLoans.php";
+    public static final String URL_TOTAL_CHAMA_MEMBERS= ROOT_URL+"getMembersCount.php";
+    public static final String URL_TOTAL_INDIVIDUAL_CONTRIBUTIONS= ROOT_URL+"getTotalIndividualContributions.php";
+    public static final String URL_TOTAL_INDIVIDUAL_FINES= ROOT_URL+"getTotalMemberFines.php";
+    public static final String URL_GET_MEMBERS= ROOT_URL+"getChamaMembers.php";
 }

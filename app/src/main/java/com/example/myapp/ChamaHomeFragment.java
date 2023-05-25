@@ -1,5 +1,6 @@
 package com.example.myapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,12 +8,21 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ChamaHomeFragment extends Fragment {
 
@@ -22,11 +32,31 @@ public class ChamaHomeFragment extends Fragment {
     private Animation fromBottom;
     private Animation toBottom;
     private boolean isOpen = false;
+    private TextView chamaHeader,txtName,txtChama;
+    private String chamaId;
+    private CardView card2,card3,card4,card5;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chama_home, container, false);
+
+        card2= view.findViewById(R.id.card2);
+        card3= view.findViewById(R.id.card3);
+
+        Bundle arguments = getArguments();
+        if(arguments != null) {
+            chamaId = arguments.getString("chamaId");
+            String chamaName = arguments.getString("chamaName");
+
+            chamaHeader = view.findViewById(R.id.txtChamaTitle);
+            chamaHeader.setText(chamaName);
+            txtChama = view.findViewById(R.id.txtChama);
+            txtChama.setText(chamaName);
+        }
+
+        String user= SharedPrefManager.getInstance(getContext()).getKeyUserName();
+        txtName = view.findViewById(R.id.txtName);
+        txtName.setText(user);
 
         // Initialize views
         fab = view.findViewById(R.id.chamaFloatingButton);
@@ -83,6 +113,33 @@ public class ChamaHomeFragment extends Fragment {
             }
 
         });
+
+        card2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewMembers viewMembers= new ViewMembers();
+                Bundle args = new Bundle();
+                args.putString("chamaId", chamaId);
+                viewMembers.setArguments(args);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.chamaFrameLayout, viewMembers);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+
+
+        fetchTotalFunds();
+
+        fetchTotalMembers();
+
+
+
+        fetchTotalIndividualContributions();
+        fetchTotalIndividualFines();
+        fetchTotalIndividualLoans();
 
         return view;
     }
@@ -142,4 +199,160 @@ public class ChamaHomeFragment extends Fragment {
         }
         isOpen = !isOpen;
     }
+
+    private void fetchTotalFunds() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.URL_TOTAL_CHAMA_FUNDS+ "?chama_id=" + chamaId, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int totalFunds = jsonObject.getInt("totalFunds");
+
+                    TextView fundsCountTextView = getView().findViewById(R.id.txtFunds);
+                    fundsCountTextView.setText(String.valueOf(totalFunds));
+                } catch (JSONException e) {
+                    showToast("Error occurred: " + e.getMessage(), true);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Context context = getContext();
+                showToast(error.getMessage(),true);
+            }
+        });
+
+        Context context = getContext();
+        RequestHandler.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
+    private void fetchTotalMembers() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.URL_TOTAL_CHAMA_MEMBERS+ "?chama_id=" + chamaId, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int totalMembers = jsonObject.getInt("totalMembers");
+
+                    TextView membersCountTextView = getView().findViewById(R.id.membersCountTextView);
+                    membersCountTextView.setText(String.valueOf(totalMembers));
+                } catch (JSONException e) {
+                    showToast("Error occurred: " + e.getMessage(), true);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Context context = getContext();
+                showToast(error.getMessage(),true);
+            }
+        });
+
+        Context context = getContext();
+        RequestHandler.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
+    private void fetchTotalIndividualContributions() {
+        int userId = Integer.parseInt(SharedPrefManager.getInstance(getContext()).getUserId());
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.URL_TOTAL_INDIVIDUAL_CONTRIBUTIONS+ "?chama_id=" + chamaId + "&user_id=" + userId, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int totalMemberContributions = jsonObject.getInt("totalMemberContributions");
+
+                    TextView contributionsCountTextView = getView().findViewById(R.id.txtCountContributions);
+                    contributionsCountTextView.setText(String.valueOf(totalMemberContributions));
+                } catch (JSONException e) {
+                    showToast("Error occurred: " + e.getMessage(), true);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Context context = getContext();
+                showToast(error.getMessage(),true);
+            }
+        });
+
+        Context context = getContext();
+        RequestHandler.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
+    private void fetchTotalIndividualFines() {
+        int userId = Integer.parseInt(SharedPrefManager.getInstance(getContext()).getUserId());
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.URL_TOTAL_INDIVIDUAL_FINES+ "?chama_id=" + chamaId + "&user_id=" + userId, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int totalMemberFines = jsonObject.getInt("totalMemberFines");
+
+                    TextView finesCountTextView = getView().findViewById(R.id.txtFinesCount);
+                    finesCountTextView.setText(String.valueOf(totalMemberFines));
+                } catch (JSONException e) {
+                    showToast("Error occurred: " + e.getMessage(), true);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Context context = getContext();
+                showToast(error.getMessage(),true);
+            }
+        });
+
+        Context context = getContext();
+        RequestHandler.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
+    private void fetchTotalIndividualLoans() {
+        int userId = Integer.parseInt(SharedPrefManager.getInstance(getContext()).getUserId());
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.URL_TOTAL_INDIVIDUAL_LOANS+ "?chama_id=" + chamaId + "&user_id=" + userId, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int totalMemberLoans = jsonObject.getInt("totalMemberLoans");
+
+                    TextView loansCountTextView = getView().findViewById(R.id.txtLoansCount);
+                    loansCountTextView.setText(String.valueOf(totalMemberLoans));
+                } catch (JSONException e) {
+                    showToast("Error occurred: " + e.getMessage(), true);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Context context = getContext();
+                showToast(error.getMessage(),true);
+            }
+        });
+
+        Context context = getContext();
+        RequestHandler.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
+
+
+    private void showToast(String message, boolean isError) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout;
+
+        if (isError) {
+            layout = inflater.inflate(R.layout.custom_toast_error, getView().findViewById(R.id.toast_message));
+        } else {
+            layout = inflater.inflate(R.layout.custom_toast_success, getView().findViewById(R.id.toast_message));
+        }
+
+        TextView toastMessage = layout.findViewById(R.id.toast_message);
+        toastMessage.setText(message);
+
+        Toast toast = new Toast(getContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
+    }
+
+
 }

@@ -9,22 +9,35 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapp.databinding.ActivityChamaBinding;
 
-public class ChamaActivity extends AppCompatActivity   {
+public class ChamaActivity extends AppCompatActivity {
+    private String chamaId;
+    private String chamaName;
 
     ActivityChamaBinding chamaBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        chamaBinding= ActivityChamaBinding.inflate(getLayoutInflater());
+        chamaBinding = ActivityChamaBinding.inflate(getLayoutInflater());
         setContentView(chamaBinding.getRoot());
-        replaceFragment(new ChamaHomeFragment());
+
+        // Get the chamaId and chamaName values from the intent extras
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            chamaId = extras.getString("chamaId");
+            chamaName = extras.getString("chamaName");
+        }
+
+        ChamaHomeFragment chamaHomeFragment = new ChamaHomeFragment();
+        Bundle arguments = new Bundle();
+        arguments.putString("chamaId", chamaId);
+        arguments.putString("chamaName", chamaName);
+        chamaHomeFragment.setArguments(arguments);
+        replaceFragment(chamaHomeFragment);
 
         chamaBinding.bottomChamaNavigationView.setOnItemSelectedListener(item -> {
-
-            switch (item.getItemId()){
-                case  R.id.chamaHome:
+            switch (item.getItemId()) {
+                case R.id.chamaHome:
                     replaceFragment(new ChamaHomeFragment());
                     break;
                 case R.id.chamaNotifications:
@@ -34,19 +47,15 @@ public class ChamaActivity extends AppCompatActivity   {
                     replaceFragment(new ChamaSettingsFragment());
                     break;
             }
-            return true ;
+            return true;
         });
-
     }
 
-
-
-    private void replaceFragment(Fragment fragment){
-        FragmentManager fragmentManager= getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.chamaFrameLayout, fragment);
         fragmentTransaction.commit();
-
     }
 
 
