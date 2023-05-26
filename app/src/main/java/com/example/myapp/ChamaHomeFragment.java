@@ -42,6 +42,8 @@ public class ChamaHomeFragment extends Fragment {
 
         card2= view.findViewById(R.id.card2);
         card3= view.findViewById(R.id.card3);
+        card4= view.findViewById(R.id.card4);
+        card5= view.findViewById(R.id.card5);
 
         Bundle arguments = getArguments();
         if(arguments != null) {
@@ -124,6 +126,51 @@ public class ChamaHomeFragment extends Fragment {
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.chamaFrameLayout, viewMembers);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        card5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IndividualLoans individualLoans= new IndividualLoans();
+                Bundle args = new Bundle();
+                args.putString("chamaId", chamaId);
+                individualLoans.setArguments(args);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.chamaFrameLayout, individualLoans);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        card4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IndividualFines individualFines= new IndividualFines();
+                Bundle args = new Bundle();
+                args.putString("chamaId", chamaId);
+                individualFines.setArguments(args);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.chamaFrameLayout, individualFines);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        card3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IndividualContributions individualContributions= new IndividualContributions();
+                Bundle args = new Bundle();
+                args.putString("chamaId", chamaId);
+                individualContributions.setArguments(args);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.chamaFrameLayout, individualContributions);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }

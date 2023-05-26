@@ -22,4 +22,8 @@ public class Constants {
     public static final String URL_TOTAL_INDIVIDUAL_CONTRIBUTIONS= ROOT_URL+"getTotalIndividualContributions.php";
     public static final String URL_TOTAL_INDIVIDUAL_FINES= ROOT_URL+"getTotalMemberFines.php";
     public static final String URL_GET_MEMBERS= ROOT_URL+"getChamaMembers.php";
+    public static final String URL_GET_MEMBER_FINES= ROOT_URL+"getMemberFines.php";
+    public static final String URL_GET_MEMBER_LOANS= ROOT_URL+"getMemberLoans.php";
+    public static final String URL_GET_MEMBER_CONTRIBUTIONS= ROOT_URL+"getMemberContributions.php";
+
 }
