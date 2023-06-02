@@ -80,7 +80,15 @@ public class ChamaHomeFragment extends Fragment {
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ContributionsFragment contributionsFragment= new ContributionsFragment();
+                Bundle args = new Bundle();
+                args.putString("chamaId", chamaId);
+                contributionsFragment.setArguments(args);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.chamaFrameLayout, contributionsFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 
@@ -88,7 +96,15 @@ public class ChamaHomeFragment extends Fragment {
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                WithdrawalsFragment withdrawalsFragment= new WithdrawalsFragment();
+                Bundle args = new Bundle();
+                args.putString("chamaId", chamaId);
+                withdrawalsFragment.setArguments(args);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.chamaFrameLayout, withdrawalsFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
 
         });
@@ -96,7 +112,15 @@ public class ChamaHomeFragment extends Fragment {
         fab3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                FinesFragment finesFragment= new FinesFragment();
+                Bundle args = new Bundle();
+                args.putString("chamaId", chamaId);
+                finesFragment.setArguments(args);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.chamaFrameLayout, finesFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
 
         });
@@ -104,14 +128,30 @@ public class ChamaHomeFragment extends Fragment {
         fab4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                LoansFragment loansFragment= new LoansFragment();
+                Bundle args = new Bundle();
+                args.putString("chamaId", chamaId);
+                loansFragment.setArguments(args);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.chamaFrameLayout, loansFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
 
         });
         fab5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                MeetingsFragment meetingsFragment= new MeetingsFragment();
+                Bundle args = new Bundle();
+                args.putString("chamaId", chamaId);
+                meetingsFragment.setArguments(args);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.chamaFrameLayout, meetingsFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
 
         });
@@ -179,11 +219,7 @@ public class ChamaHomeFragment extends Fragment {
 
 
         fetchTotalFunds();
-
         fetchTotalMembers();
-
-
-
         fetchTotalIndividualContributions();
         fetchTotalIndividualFines();
         fetchTotalIndividualLoans();
@@ -399,6 +435,21 @@ public class ChamaHomeFragment extends Fragment {
         toast.setDuration(Toast.LENGTH_LONG);
         toast.setView(layout);
         toast.show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Bundle arguments = getArguments();
+        if(arguments != null) {
+            chamaId = arguments.getString("chamaId");
+            fetchTotalIndividualLoans();
+            fetchTotalIndividualFines();
+            fetchTotalMembers();
+            fetchTotalMembers();
+            fetchTotalFunds();
+
+        }
     }
 
 

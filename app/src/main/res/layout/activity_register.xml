@@ -111,6 +111,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/select"
+
         android:textColorHint="@color/white"
         android:layout_marginBottom="20dp"
         android:background="@drawable/input_bg"
@@ -130,6 +131,8 @@
         android:layout_height="wrap_content"
         android:hint="Password"
         android:textColorHint="@color/white"
+        app:startIconDrawable="@drawable/ic_key"
+        app:startIconTint="@color/white"
         app:endIconMode="password_toggle"
         app:passwordToggleDrawable="@drawable/visible_password"
         app:passwordToggleEnabled="true"
@@ -141,7 +144,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/input_bg"
             android:drawableLeft="@drawable/ic_key"
-            android:drawablePadding="10dp"
+            android:drawablePadding="0dp"
             android:minHeight="48dp"
             android:paddingLeft="20dp"
             android:layout_marginBottom="20dp"
@@ -159,6 +162,8 @@
         android:layout_height="wrap_content"
         android:hint="Confirm Password"
         android:textColorHint="@color/white"
+        app:startIconTint="@color/white"
+        app:startIconDrawable="@drawable/ic_key"
         app:endIconMode="password_toggle"
         app:passwordToggleDrawable="@drawable/visible_password"
         app:passwordToggleEnabled="true"
@@ -169,8 +174,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_bg"
-            android:drawableLeft="@drawable/ic_key"
-            android:drawablePadding="10dp"
+            android:drawablePadding="0dp"
             android:minHeight="48dp"
             android:paddingLeft="20dp"
             android:layout_marginBottom="20dp"
@@ -180,6 +184,11 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <ImageView
+        android:id="@+id/password_toggle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
 
     <Button

@@ -11,7 +11,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardIndividualContribution"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="90dp"
         android:layout_margin="5dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="10dp"
@@ -22,23 +22,69 @@
 
 
         <TextView
-            android:id="@+id/txtContributionId"
+            android:id="@+id/conttxt1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:text="Id"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:layout_marginTop="18dp"
+            android:text="Id:"
+            android:textSize="15sp"
             android:textColor="@color/white"
             />
+
+        <TextView
+            android:id="@+id/txtContributionId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="18dp"
+            android:text="Id"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            />
+
+
+
+        <TextView
+            android:id="@+id/conttxt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="40dp"
+            android:text="Contribution Amount:"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/contributionAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="155dp"
+            android:layout_marginTop="40dp"
+            android:text="Amount"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/conttxt3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="60dp"
+            android:text="Contribution Date:"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            />
+
 
         <TextView
             android:id="@+id/txtContributionDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="45dp"
+            android:layout_marginLeft="135dp"
+            android:layout_marginTop="60dp"
             android:text="Date"
             android:textSize="15sp"
             android:textColor="@color/white"
@@ -46,22 +92,6 @@
 
 
 
-        <Button
-            android:id="@+id/btnIndividualContribution"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="250dp"
-            android:layout_marginRight="20dp"
-            android:drawableLeft="@drawable/ic_baseline_visibility_24"
-            android:text="View"
-            android:textColor="@color/design_default_color_primary"
-            android:textAllCaps="false"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            android:backgroundTint="@color/white"
-            android:drawableTint="@color/design_default_color_primary"
-            />
 
 
 

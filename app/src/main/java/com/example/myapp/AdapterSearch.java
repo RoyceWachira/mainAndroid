@@ -97,6 +97,7 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.MyViewHold
                             String message = jsonObject.getString("message");
 
                             if (error==false) {
+                                sendJoinChamaNotification(position);
                                 showToast(message,false);
                             } else {
                                 showToast(message,true);
@@ -145,6 +146,21 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.MyViewHold
         toast.setDuration(Toast.LENGTH_LONG);
         toast.setView(layout);
         toast.show();
+    }
+
+    private void sendJoinChamaNotification(int position) {
+        String chamaId = chamasList.get(position).getChamaId();
+        int userId = Integer.parseInt(SharedPrefManager.getInstance(context).getUserId());
+        String notificationContent = "User " + userId + " has requested to join Chama " + chamaId;
+        String url = Constants.URL_REQUEST_JOIN_CHAMA+ "?chama_id=" + chamaId + "&user_id=" + userId;
+
+        // Create an instance of NotificationSender
+        NotificationSender notificationSender = new NotificationSender();
+
+        // Call the sendNotification method
+        notificationSender.sendNotification(context,String.valueOf(userId), notificationContent, url);
+
+
     }
 
 

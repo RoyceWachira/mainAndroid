@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardIndividualFine"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="120dp"
         android:layout_margin="5dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="10dp"
@@ -21,46 +21,117 @@
 
 
         <TextView
-            android:id="@+id/txtFineId"
+            android:id="@+id/finetxt1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
-            android:text="Id"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:text="Id:"
+            android:textSize="15sp"
             android:textColor="@color/white"
             />
 
         <TextView
-            android:id="@+id/txtfineStatus"
+            android:id="@+id/txtFineId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="11dp"
-            android:layout_marginTop="45dp"
-            android:text="Status"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:text="Id"
             android:textSize="15sp"
             android:textColor="@color/white"
             />
 
 
 
-        <Button
-            android:id="@+id/btnIndividualFine"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/finetxt2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="250dp"
-            android:layout_marginRight="20dp"
-            android:drawableLeft="@drawable/ic_baseline_visibility_24"
-            android:text="View"
-            android:textColor="@color/design_default_color_primary"
-            android:textAllCaps="false"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            android:backgroundTint="@color/white"
-            android:drawableTint="@color/design_default_color_primary"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="35dp"
+            android:text="Fine Amount:"
+            android:textSize="15sp"
+            android:textColor="@color/white"
             />
+
+        <TextView
+            android:id="@+id/txtFineAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="35dp"
+            android:text="Amount"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/finetxt3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="55dp"
+            android:text="Fine Reason:"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            />
+
+
+        <TextView
+            android:id="@+id/txtFineReason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="55dp"
+            android:text="Reason"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/finetxt4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="75dp"
+            android:text="Fine Status:"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/txtFineStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="75dp"
+            android:text="Status"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            />
+        <TextView
+            android:id="@+id/finetxt5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="95dp"
+            android:text="Date Fined:"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/txtDateFined"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="85dp"
+            android:layout_marginTop="95dp"
+            android:text="Date"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            />
+
 
 
 

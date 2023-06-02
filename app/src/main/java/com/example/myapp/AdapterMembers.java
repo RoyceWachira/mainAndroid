@@ -1,6 +1,7 @@
 package com.example.myapp;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -46,15 +49,22 @@ public class AdapterMembers extends RecyclerView.Adapter<AdapterMembers.MyViewHo
         holder.viewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Context context = v.getContext();
-//                Intent intent = new Intent(context, ChamaActivity.class);
-//                intent.putExtra("username", membersList.get(holder.getAdapterPosition()).getUserName());
-//                intent.putExtra("firstName", membersList.get(holder.getAdapterPosition()).getFirstName());
-//                intent.putExtra("chamaRole", membersList.get(holder.getAdapterPosition()).getChamaRole());
-//                intent.putExtra("dateJoined", membersList.get(holder.getAdapterPosition()).getDateJoined());
-//                intent.putExtra("email", membersList.get(holder.getAdapterPosition()).getEmail());
-//                intent.putExtra("phoneNumber", membersList.get(holder.getAdapterPosition()).getPhoneNumber());
-//                context.startActivity(intent);
+                MemberDetails memberDetails = new MemberDetails();
+                Bundle bundle = new Bundle();
+                bundle.putString("username", member.getUserName());
+                bundle.putString("firstName", member.getFirstName());
+                bundle.putString("chamaRole", member.getChamaRole());
+                bundle.putString("dateJoined", member.getDateJoined());
+                bundle.putString("email", member.getEmail());
+                bundle.putString("phoneNumber", member.getPhoneNumber());
+                memberDetails.setArguments(bundle);
+
+                // Replace the current fragment with the new fragment
+                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.chamaFrameLayout, memberDetails)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
@@ -82,7 +92,7 @@ public class AdapterMembers extends RecyclerView.Adapter<AdapterMembers.MyViewHo
             imageView=itemView.findViewById(R.id.leader);
         }
         public void bind(Members member) {
-            if (member.getChamaRole().equals("Chairperson") || member.getChamaRole().equals("Vice Chairperson") || member.getChamaRole().equals("Treasurer") || member.getChamaRole().equals("Secretatry") ) {
+            if (member.getChamaRole().equals("Chairperson") || member.getChamaRole().equals("Vice Chairperson") || member.getChamaRole().equals("Treasurer") || member.getChamaRole().equals("Secretary") ) {
                 imageView.setVisibility(View.VISIBLE);
             } else {
                 imageView.setVisibility(View.GONE);

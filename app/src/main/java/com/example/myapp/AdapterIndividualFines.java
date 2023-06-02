@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,22 +39,9 @@ public class AdapterIndividualFines extends RecyclerView.Adapter<AdapterIndividu
 
         holder.txtFineId.setText(fines.getFineId());
         holder.txtFineStatus.setText(fines.getFineStatus());
-
-        holder.btnIndividualFine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Context context = v.getContext();
-//                Intent intent = new Intent(context, ChamaActivity.class);
-//                intent.putExtra("username", membersList.get(holder.getAdapterPosition()).getUserName());
-//                intent.putExtra("firstName", membersList.get(holder.getAdapterPosition()).getFirstName());
-//                intent.putExtra("chamaRole", membersList.get(holder.getAdapterPosition()).getChamaRole());
-//                intent.putExtra("dateJoined", membersList.get(holder.getAdapterPosition()).getDateJoined());
-//                intent.putExtra("email", membersList.get(holder.getAdapterPosition()).getEmail());
-//                intent.putExtra("phoneNumber", membersList.get(holder.getAdapterPosition()).getPhoneNumber());
-//                context.startActivity(intent);
-            }
-        });
-
+        holder.txtFineReason.setText(fines.getFineReason());
+        holder.txtFineAmount.setText(fines.getFineAmount());
+        holder.txtDate.setText(fines.getDateFined());
     }
 
     @Override
@@ -68,14 +54,15 @@ public class AdapterIndividualFines extends RecyclerView.Adapter<AdapterIndividu
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         CardView cardIndividualFines;
-        TextView txtFineId,txtFineStatus;
-        Button btnIndividualFine;
+        TextView txtFineId,txtFineStatus,txtFineAmount,txtFineReason,txtDate;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            btnIndividualFine= itemView.findViewById(R.id.btnIndividualFine);
+            txtFineAmount= itemView.findViewById(R.id.txtFineAmount);
+            txtFineReason= itemView.findViewById(R.id.txtFineReason);
             cardIndividualFines=itemView.findViewById(R.id.cardIndividualFine);
             txtFineId= itemView.findViewById(R.id.txtFineId);
-            txtFineStatus= itemView.findViewById(R.id.txtfineStatus);
+            txtFineStatus= itemView.findViewById(R.id.txtFineStatus);
+            txtDate= itemView.findViewById(R.id.txtDateFined);
         }
 
     }

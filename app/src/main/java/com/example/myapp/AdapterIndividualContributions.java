@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,21 +39,7 @@ public class AdapterIndividualContributions extends RecyclerView.Adapter<Adapter
 
         holder.txtContributionId.setText(contributions.getContributionId());
         holder.txtContributionDate.setText(contributions.getContributionDate());
-
-        holder.btnIndividualContribution.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Context context = v.getContext();
-//                Intent intent = new Intent(context, ChamaActivity.class);
-//                intent.putExtra("username", membersList.get(holder.getAdapterPosition()).getUserName());
-//                intent.putExtra("firstName", membersList.get(holder.getAdapterPosition()).getFirstName());
-//                intent.putExtra("chamaRole", membersList.get(holder.getAdapterPosition()).getChamaRole());
-//                intent.putExtra("dateJoined", membersList.get(holder.getAdapterPosition()).getDateJoined());
-//                intent.putExtra("email", membersList.get(holder.getAdapterPosition()).getEmail());
-//                intent.putExtra("phoneNumber", membersList.get(holder.getAdapterPosition()).getPhoneNumber());
-//                context.startActivity(intent);
-            }
-        });
+        holder.txtContributionAmount.setText(contributions.getContributionAmount());
 
     }
 
@@ -68,11 +53,11 @@ public class AdapterIndividualContributions extends RecyclerView.Adapter<Adapter
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         CardView cardIndividualContributions;
-        TextView txtContributionId,txtContributionDate;
-        Button btnIndividualContribution;
+        TextView txtContributionId,txtContributionDate,txtContributionAmount;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            btnIndividualContribution= itemView.findViewById(R.id.btnIndividualContribution);
+            txtContributionAmount= itemView.findViewById(R.id.contributionAmount);
             cardIndividualContributions=itemView.findViewById(R.id.cardIndividualContribution);
             txtContributionId= itemView.findViewById(R.id.txtContributionId);
             txtContributionDate= itemView.findViewById(R.id.txtContributionDate);

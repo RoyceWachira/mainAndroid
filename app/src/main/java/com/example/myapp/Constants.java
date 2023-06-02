@@ -2,7 +2,7 @@ package com.example.myapp;
 
 public class Constants {
 
-    private static final String ROOT_URL="http://192.168.100.5/Api/";
+    private static final String ROOT_URL="http://192.168.100.7/Api/";
 
     public static final String URL_REGISTER= ROOT_URL+"register.php";
     public static final String URL_LOGIN= ROOT_URL+"login.php";
@@ -25,5 +25,5 @@ public class Constants {
     public static final String URL_GET_MEMBER_FINES= ROOT_URL+"getMemberFines.php";
     public static final String URL_GET_MEMBER_LOANS= ROOT_URL+"getMemberLoans.php";
     public static final String URL_GET_MEMBER_CONTRIBUTIONS= ROOT_URL+"getMemberContributions.php";
-
+    public static final String URL_IS_LEADER= ROOT_URL+"hasLeadershipRole.php";
 }

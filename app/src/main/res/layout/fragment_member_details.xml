@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bb"
+    tools:context=".MemberDetails">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/design_default_color_primary"
+        android:padding="8dp">
+
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:padding="8dp"
+            android:text="Member Details"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+        android:src="@drawable/ic_image_person_foreground"
+        android:tint="@color/white"
+        android:padding="5dp"
+        app:strokeWidth="3dp"
+        android:layout_marginLeft="145dp"
+        android:layout_marginTop="60dp"
+        app:strokeColor="@color/design_default_color_primary"
+        />
+    <TextView
+        android:id="@+id/headUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:gravity="center"
+        android:text="UserName"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        />
+
+    <TextView
+        android:id="@+id/headChamaRole"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="190dp"
+        android:gravity="center"
+        android:text="Chama Role"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/firstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:gravity="left"
+        android:layout_marginLeft="15dp"
+        android:text="First Name:"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/txtfname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="275dp"
+        android:layout_marginLeft="15dp"
+        android:gravity="left"
+        android:text="First Name"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        />
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="310dp"
+        android:gravity="left"
+        android:layout_marginLeft="15dp"
+        android:text="Email:"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/mail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="335dp"
+        android:layout_marginLeft="15dp"
+        android:gravity="left"
+        android:text="Email"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        />
+
+    <TextView
+        android:id="@+id/phoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="370dp"
+        android:gravity="left"
+        android:layout_marginLeft="15dp"
+        android:text="Phone Number:"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="395dp"
+        android:layout_marginLeft="15dp"
+        android:gravity="left"
+        android:text="Phone Number"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        />
+
+    <TextView
+        android:id="@+id/dateJoin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="430dp"
+        android:gravity="left"
+        android:layout_marginLeft="15dp"
+        android:text="Date Joined:"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/joined"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="455dp"
+        android:layout_marginLeft="15dp"
+        android:gravity="left"
+        android:text="Date Joined"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        />
+
+
+
+
+</FrameLayout>

@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,21 +39,9 @@ public class AdapterIndividualLoans extends RecyclerView.Adapter<AdapterIndividu
 
         holder.txtLoanId.setText(loans.getLoanId());
         holder.txtLoanStatus.setText(loans.getLoanStatus());
-
-        holder.btnIndividualLoan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Context context = v.getContext();
-//                Intent intent = new Intent(context, ChamaActivity.class);
-//                intent.putExtra("username", membersList.get(holder.getAdapterPosition()).getUserName());
-//                intent.putExtra("firstName", membersList.get(holder.getAdapterPosition()).getFirstName());
-//                intent.putExtra("chamaRole", membersList.get(holder.getAdapterPosition()).getChamaRole());
-//                intent.putExtra("dateJoined", membersList.get(holder.getAdapterPosition()).getDateJoined());
-//                intent.putExtra("email", membersList.get(holder.getAdapterPosition()).getEmail());
-//                intent.putExtra("phoneNumber", membersList.get(holder.getAdapterPosition()).getPhoneNumber());
-//                context.startActivity(intent);
-            }
-        });
+        holder.txtLoanAmount.setText(loans.getLoanAmount());
+        holder.txtAmountPayable.setText(loans.getAmountPayable());
+        holder.txtDueAt.setText(loans.getDueAt());
 
     }
 
@@ -68,11 +55,12 @@ public class AdapterIndividualLoans extends RecyclerView.Adapter<AdapterIndividu
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         CardView cardIndividualLoan;
-        TextView txtLoanId,txtLoanStatus;
-        Button btnIndividualLoan;
+        TextView txtLoanId,txtLoanStatus,txtAmountPayable,txtLoanAmount,txtDueAt;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            btnIndividualLoan= itemView.findViewById(R.id.btnIndividualLoan);
+            txtAmountPayable= itemView.findViewById(R.id.txtAmountPayable);
+            txtLoanAmount= itemView.findViewById(R.id.txtloanAmount);
+            txtDueAt= itemView.findViewById(R.id.txtloanDueAt);
             cardIndividualLoan=itemView.findViewById(R.id.cardIndividualLoan);
             txtLoanId= itemView.findViewById(R.id.txtLoanId);
             txtLoanStatus= itemView.findViewById(R.id.txtloanStatus);

@@ -1,13 +1,18 @@
 package com.example.myapp;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,8 +46,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("chama_notifications", "Chama Notifications", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
         loginUserName = findViewById(R.id.loginUsername);
         loginPassword = findViewById(R.id.loginPassword);
+
         btnLogin = findViewById(R.id.btnLogin);
         txtRegister = findViewById(R.id.txtRegister);
         txtForgotPassword = findViewById(R.id.txtForgotPassword);
@@ -56,6 +69,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void userLogin() {
         final String username = loginUserName.getText().toString().trim();
         final String password = loginPassword.getText().toString().trim();
+
+        TextInputLayout passwordInputLayout = findViewById(R.id.password_text_input);
+        final ImageView passwordToggle = findViewById(R.id.password_toggle);
+        passwordToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (loginPassword.getInputType() == InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                    loginPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    passwordToggle.setImageResource(R.drawable.visible_password);
+                } else {
+                    loginPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    passwordToggle.setImageResource(R.drawable.visible_password);
+                }
+            }
+        });
         progressDialog.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.URL_LOGIN, new Response.Listener<String>() {
@@ -80,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(userId, username, role,sId);
 
                                 showToast(message, false); // Show success message with green background color
+                                finish();
                                 startActivity(new Intent(MainActivity.this, HomeActivity.class));
                             }
                         } catch (JSONException e) {
@@ -134,6 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view){
         if(view==btnLogin)
             userLogin();
+
         if (view==txtRegister)
             startActivity(new Intent(this, RegisterActivity.class));
         if (view==txtForgotPassword)

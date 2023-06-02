@@ -41,7 +41,7 @@
         android:tint="@color/white"
         android:padding="5dp"
         app:strokeWidth="3dp"
-        android:layout_marginLeft="155dp"
+        android:layout_marginLeft="145dp"
         android:layout_marginTop="60dp"
         app:strokeColor="@color/design_default_color_primary"
         />
@@ -59,7 +59,7 @@
 
     <EditText
         android:id="@+id/updateFirstName"
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:background="@drawable/input_bg"
@@ -77,7 +77,7 @@
 
     <EditText
         android:id="@+id/updateLastName"
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:background="@drawable/input_bg"
@@ -90,13 +90,13 @@
         android:paddingBottom="10dp"
         android:layout_marginTop="200dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginLeft="210dp"
+        android:layout_marginLeft="205dp"
         android:textColor="#ECE5E5"
         android:textColorHint="@color/white" />
 
     <EditText
         android:id="@+id/updateUsername"
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:background="@drawable/input_bg"
@@ -114,7 +114,7 @@
 
     <EditText
         android:id="@+id/updatePhoneNumber"
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:background="@drawable/input_bg"
@@ -127,13 +127,13 @@
         android:paddingBottom="10dp"
         android:layout_marginTop="270dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginLeft="210dp"
+        android:layout_marginLeft="205dp"
         android:textColor="#ECE5E5"
         android:textColorHint="@color/white" />
 
     <EditText
         android:id="@+id/updateMail"
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:background="@drawable/input_bg"
         android:drawableLeft="@drawable/ic_email"
@@ -148,12 +148,12 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/updateGender"
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="50dp"
         android:hint="@string/select"
         android:textColorHint="@color/white"
         android:layout_marginTop="340dp"
-        android:layout_marginLeft="210dp"
+        android:layout_marginLeft="205dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/input_bg"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">

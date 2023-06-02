@@ -1,63 +1,145 @@
 package com.example.myapp;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ChamaNotificationsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChamaNotificationsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private RecyclerView recyclerView;
+    private NotificationAdapter notificationAdapter;
+    private List<Notification> notificationsList;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ChamaNotificationsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ChamaNotificationsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ChamaNotificationsFragment newInstance(String param1, String param2) {
-        ChamaNotificationsFragment fragment = new ChamaNotificationsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_chama_notifications, container, false);
+        recyclerView = rootView.findViewById(R.id.recyclerViewNotifications);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        return rootView;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        notificationsList = new ArrayList<>();
+        notificationAdapter = new NotificationAdapter(notificationsList);
+        recyclerView.setAdapter(notificationAdapter);
+
+    }
+
+    private void addNotification(Notification notification) {
+        notificationsList.add(notification);
+        notificationAdapter.notifyDataSetChanged();
+    }
+
+    // Notification class to hold notification data
+    private static class Notification {
+        private String title;
+        private String content;
+
+        public Notification( String title, String content) {
+            this.title = title;
+            this.content = content;
+        }
+
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getContent() {
+            return content;
         }
     }
 
+    // Adapter for the notification list
+    private class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
+
+        private List<Notification> notifications;
+
+        public NotificationAdapter(List<Notification> notifications) {
+            this.notifications = notifications;
+        }
+
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.notifications, parent, false);
+            return new ViewHolder(itemView);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            Notification notification = notifications.get(position);
+            holder.textTitle.setText(notification.getTitle());
+            holder.textContent.setText(notification.getContent());
+        }
+
+        @Override
+        public int getItemCount() {
+            int itemCount = notifications.size();
+            Log.d("Adapter", "notifications List Size: " + itemCount);
+            return itemCount;
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            public TextView textTitle;
+            public TextView textContent;
+
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+                textTitle = itemView.findViewById(R.id.txtNoticeTitle);
+                textContent = itemView.findViewById(R.id.txtNoticeContent);
+            }
+        }
+    }
+
+    private final BroadcastReceiver notificationReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent broadcastIntent) {
+            // Extract the notification data from the broadcast intent
+            String title = broadcastIntent.getStringExtra("title");
+            String content = broadcastIntent.getStringExtra("content");
+
+            Log.d("RTitle",title);
+            Log.d("RContent",content);
+            Notification notification = new Notification(title, content);
+
+            Log.d("n", String.valueOf(notification));
+            // Add the new notification to the list
+            addNotification(notification);
+
+        }
+    };
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chama_notifications, container, false);
+    public void onResume() {
+        super.onResume();
+        // Register the broadcast receiver to receive notification data
+        IntentFilter filter = new IntentFilter("com.example.myapp.NOTIFY");
+        requireContext().registerReceiver(notificationReceiver, filter);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Unregister the broadcast receiver
+        requireContext().unregisterReceiver(notificationReceiver);
     }
 }
