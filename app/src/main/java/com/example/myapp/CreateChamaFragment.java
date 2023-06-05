@@ -33,54 +33,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CreateChamaFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class CreateChamaFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public CreateChamaFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CreateChamaFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CreateChamaFragment newInstance(String param1, String param2) {
-        CreateChamaFragment fragment = new CreateChamaFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    private EditText editChamaName, editChamaDesc;
+    private EditText editChamaName, editChamaDesc, editContTarget;
     private Button btnCreate;
     private ProgressDialog progressDialog;
 
@@ -95,7 +51,7 @@ public class CreateChamaFragment extends Fragment {
 
         editChamaDesc = view.findViewById(R.id.editChamaDesc);
         editChamaName = view.findViewById(R.id.editChamaName);
-
+        editContTarget= view.findViewById(R.id.editContTarget);
         btnCreate = view.findViewById(R.id.btnCreate);
 
         autoComplete_txtFlow = view.findViewById(R.id.autoComplete_txtFlow);
@@ -141,6 +97,7 @@ public class CreateChamaFragment extends Fragment {
         final String chamaDesc = editChamaDesc.getText().toString().trim();
         final String contributionPeriod = autoComplete_txtPeriod.getText().toString().trim();
         final String systemFlow = autoComplete_txtFlow.getText().toString().trim();
+        final String contributionTarget= editContTarget.getText().toString().trim();
 
         // Check if all fields are filled
         if (TextUtils.isEmpty(chamaName) || TextUtils.isEmpty(chamaDesc) || TextUtils.isEmpty(systemFlow) || TextUtils.isEmpty(contributionPeriod) ) {
@@ -197,6 +154,7 @@ public class CreateChamaFragment extends Fragment {
                 params.put("description",chamaDesc);
                 params.put("contribution_period", String.valueOf(contributionPeriod));
                 params.put("system_flow", String.valueOf(systemFlow));
+                params.put("contribution_target",contributionTarget);
 
                 return params;
             }

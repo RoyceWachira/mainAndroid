@@ -26,4 +26,9 @@ public class Constants {
     public static final String URL_GET_MEMBER_LOANS= ROOT_URL+"getMemberLoans.php";
     public static final String URL_GET_MEMBER_CONTRIBUTIONS= ROOT_URL+"getMemberContributions.php";
     public static final String URL_IS_LEADER= ROOT_URL+"hasLeadershipRole.php";
+    public static final String URL_ALL_CONRIBUTIONS= ROOT_URL+"getAllContributions.php";
+    public static final String URL_MAKE_CONRIBUTION= ROOT_URL+"makeContribution.php";
+    public static final String URL_CHECK_SYSTEM_FLOW= ROOT_URL+"checkSystemFlow.php";
+    public static final String URL_MAKE_WITHDRAWAL= ROOT_URL+"makeWithdrawal.php";
+    public static final String URL_IS_TREASURER= ROOT_URL+"isTreasurer.php";
 }

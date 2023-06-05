@@ -136,7 +136,7 @@
         android:layout_height="50dp"
         android:hint="@string/system_flow_type"
         android:textColorHint="@color/white"
-        android:layout_marginTop="430dp"
+        android:layout_marginTop="500dp"
         app:startIconDrawable="@drawable/ic_baseline_app_settings_alt_24"
         android:layout_marginLeft="10dp"
         app:startIconTint="@color/white"
@@ -151,12 +151,32 @@
             android:inputType="none"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <EditText
+        android:id="@+id/editContTarget"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:background="@drawable/input_bg"
+        android:drawableLeft="@drawable/ic_baseline_data_exploration_24"
+        android:drawablePadding="15dp"
+        android:hint="Contribution Target(in shillings)"
+        android:minHeight="48dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="430dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="#ECE5E5"
+        android:textColorHint="@color/white" />
+
+
     <Button
         android:id="@+id/btnCreate"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:background="@drawable/input_bg"
-        android:layout_marginTop="520dp"
+        android:layout_marginTop="590dp"
         android:gravity="center"
         android:layout_marginLeft="100dp"
         android:text="Create" />

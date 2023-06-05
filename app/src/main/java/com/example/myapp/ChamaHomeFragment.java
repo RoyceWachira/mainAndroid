@@ -2,6 +2,7 @@ package com.example.myapp;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,15 +27,17 @@ import org.json.JSONObject;
 
 public class ChamaHomeFragment extends Fragment {
 
-    private FloatingActionButton fab,fab2,fab1,fab3,fab4,fab5;
+    private FloatingActionButton fab,fab2,fab1,fab3,fab4,fab5,fab6,fab7;
     private Animation fabOpen;
     private Animation fabClose;
     private Animation fromBottom;
     private Animation toBottom;
     private boolean isOpen = false;
     private TextView chamaHeader,txtName,txtChama;
-    private String chamaId;
+    private String chamaId,chamaFlow,chamaName;
+
     private CardView card2,card3,card4,card5;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,7 +51,8 @@ public class ChamaHomeFragment extends Fragment {
         Bundle arguments = getArguments();
         if(arguments != null) {
             chamaId = arguments.getString("chamaId");
-            String chamaName = arguments.getString("chamaName");
+            chamaName = arguments.getString("chamaName");
+            chamaFlow= arguments.getString("chamaFlow");
 
             chamaHeader = view.findViewById(R.id.txtChamaTitle);
             chamaHeader.setText(chamaName);
@@ -67,6 +71,28 @@ public class ChamaHomeFragment extends Fragment {
         fab3= view.findViewById(R.id.floatingFine);
         fab4= view.findViewById(R.id.floatingLoan);
         fab5= view.findViewById(R.id.floatingMeet);
+
+        String[] systemTypeArray = checkSystem();
+        String systemType = (systemTypeArray != null && systemTypeArray.length > 0) ? systemTypeArray[0] : null;
+
+        Log.d("TAG", "System Type: " + systemType);
+
+        if(chamaFlow.equals("linear")){
+            fab6 = view.findViewById(R.id.floatingInvest);
+        }else {
+            fab7 = view.findViewById(R.id.floatingAllocate);
+        }
+
+        if (systemType != null && systemType.equals("linear")) {
+            fab6 = view.findViewById(R.id.floatingInvest);
+        } else if (systemType != null && systemType.equals("merry-go-round")) {
+            fab7 = view.findViewById(R.id.floatingAllocate);
+        } else if (systemType != null && systemType.equals("not_found")) {
+            Log.d("TAG", "There's Nothing ");
+        } else {
+            Log.d("TAG", "There's Nothing ");
+        }
+
 
         // Initialize animations
         fabOpen = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_open_anim);
@@ -236,17 +262,37 @@ public class ChamaHomeFragment extends Fragment {
             fab4.startAnimation(toBottom);
             fab5.startAnimation(toBottom);
 
+            if (chamaFlow.equals("linear")) {
+                fab6.startAnimation(toBottom);
+            }
+            if (chamaFlow.equals("merry-go-round")){
+                fab7.startAnimation(toBottom);
+            }
+
             fab1.setClickable(false);
             fab2.setClickable(false);
             fab3.setClickable(false);
             fab4.setClickable(false);
             fab5.setClickable(false);
 
+            if (chamaFlow.equals("linear")) {
+                fab6.setClickable(false);
+                TextView labelInvest = getView().findViewById(R.id.labelInvest);
+                labelInvest.setVisibility(View.INVISIBLE);
+            }
+
+            if(chamaFlow.equals("merry-go-round")){
+                fab7.setClickable(false);
+                TextView labelAllocate = getView().findViewById(R.id.labelAllocate);
+                labelAllocate.setVisibility(View.INVISIBLE);
+            }
+
             TextView labelContribute = getView().findViewById(R.id.labelContribute);
             TextView labelWithdraw = getView().findViewById(R.id.labelWithdraw);
             TextView labelLoan = getView().findViewById(R.id.labelLoan);
             TextView labelFine = getView().findViewById(R.id.labelFine);
             TextView labelMeet = getView().findViewById(R.id.labelMeet);
+
 
             labelContribute.setVisibility(View.INVISIBLE);
             labelWithdraw.setVisibility(View.INVISIBLE);
@@ -262,11 +308,32 @@ public class ChamaHomeFragment extends Fragment {
             fab4.startAnimation(fromBottom);
             fab5.startAnimation(fromBottom);
 
+
+            if (chamaFlow.equals("linear")) {
+                fab6.startAnimation(fromBottom);
+            }
+
+            if(chamaFlow.equals("merry-go-round")){
+                fab7.startAnimation(fromBottom);
+            }
+
             fab1.setClickable(true);
             fab2.setClickable(true);
             fab3.setClickable(true);
             fab4.setClickable(true);
             fab5.setClickable(true);
+
+            if (chamaFlow.equals("linear")) {
+                fab6.setClickable(true);
+                TextView labelInvest = getView().findViewById(R.id.labelInvest);
+                labelInvest.setVisibility(View.VISIBLE);
+            }
+
+            if(chamaFlow.equals("merry-go-round")){
+                fab7.setClickable(true);
+                TextView labelAllocate = getView().findViewById(R.id.labelAllocate);
+                labelAllocate.setVisibility(View.VISIBLE);
+            }
 
             TextView labelContribute = getView().findViewById(R.id.labelContribute);
             TextView labelWithdraw = getView().findViewById(R.id.labelWithdraw);
@@ -282,6 +349,35 @@ public class ChamaHomeFragment extends Fragment {
         }
         isOpen = !isOpen;
     }
+
+    private String[] checkSystem() {
+        final String[] systemType = new String[1];
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.URL_CHECK_SYSTEM_FLOW + "?chama_id=" + chamaId, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    systemType[0] = jsonObject.getString("system").toString(); // Assign the system type to the array element
+                    showToast(String.valueOf(systemType[0].toString()),false);
+                } catch (JSONException e) {
+                    showToast("Error occurred: " + e.getMessage(), true);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Context context = getContext();
+                showToast(error.getMessage(), true);
+            }
+        });
+
+        Context context = getContext();
+        RequestHandler.getInstance(context).addToRequestQueue(stringRequest);
+
+        return new String[]{systemType[0]}; // Return the system type
+    }
+
 
     private void fetchTotalFunds() {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.URL_TOTAL_CHAMA_FUNDS+ "?chama_id=" + chamaId, new Response.Listener<String>() {

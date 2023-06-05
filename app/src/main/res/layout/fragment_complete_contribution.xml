@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bb"
+    tools:context=".CompleteContribution">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/design_default_color_primary"
+        android:padding="8dp">
+
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:padding="8dp"
+            android:text="Contribution"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/headChamaRole"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:text="Completed Successfully"
+        android:textStyle="bold"
+        android:textColor="@color/toast_success_background"
+        android:textSize="20sp"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_done_outline_24"
+        android:layout_marginLeft="330dp"
+        android:layout_marginTop="101dp"
+        app:tint="@color/toast_success_background"
+
+        />
+
+    <TextView
+        android:id="@+id/contAmountlbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:gravity="left"
+        android:layout_marginLeft="15dp"
+        android:text="Contribution Amount:"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/txtContAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="230dp"
+        android:layout_marginLeft="15dp"
+        android:gravity="left"
+        android:text="Contribution Amount"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        />
+
+
+    <TextView
+        android:id="@+id/contAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:gravity="left"
+        android:layout_marginLeft="15dp"
+        android:text="Contribution Date:"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/txtContDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="310dp"
+        android:layout_marginLeft="15dp"
+        android:gravity="left"
+        android:text="Contribution Date"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        />
+
+    <TextView
+        android:id="@+id/contNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="360dp"
+        android:gravity="left"
+        android:layout_marginLeft="15dp"
+        android:text="Next Contribution Date:"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/txtContNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="390dp"
+        android:layout_marginLeft="15dp"
+        android:gravity="left"
+        android:text="Next Contribution Date"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        />
+
+    <Button
+        android:id="@+id/btnContPrint"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="480dp"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/input_bg"
+        android:drawableLeft="@drawable/ic_baseline_print_24"
+        android:text="Print"
+        />
+
+    <Button
+        android:id="@+id/btnContDone"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="480dp"
+        android:layout_marginLeft="220dp"
+        android:background="@drawable/input_bg"
+        android:drawableLeft="@drawable/ic_baseline_done_24"
+        android:text="Done"
+        />
+
+
+
+
+</FrameLayout>

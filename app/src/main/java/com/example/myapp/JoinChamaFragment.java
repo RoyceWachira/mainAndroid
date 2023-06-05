@@ -114,8 +114,9 @@ public class JoinChamaFragment extends Fragment {
                                 String chamaName = chamaObject.getString("chama_name");
                                 String chamaDescription = chamaObject.getString("chama_description");
                                 String chamaId= String.valueOf(chamaObject.getInt("chama_id"));
+                                String systemFlow= chamaObject.getString("systemFlow");
 
-                                Chamas chamas = new Chamas(chamaName, chamaDescription,chamaId);
+                                Chamas chamas = new Chamas(chamaName, chamaDescription,chamaId,systemFlow);
                                 chamasList.add(chamas);
                             }
 

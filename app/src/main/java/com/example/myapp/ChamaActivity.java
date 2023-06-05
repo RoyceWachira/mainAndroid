@@ -12,6 +12,7 @@ import com.example.myapp.databinding.ActivityChamaBinding;
 public class ChamaActivity extends AppCompatActivity {
     private String chamaId;
     private String chamaName;
+    private String chamaFlow;
 
     ActivityChamaBinding chamaBinding;
 
@@ -26,12 +27,14 @@ public class ChamaActivity extends AppCompatActivity {
         if (extras != null) {
             chamaId = extras.getString("chamaId");
             chamaName = extras.getString("chamaName");
+            chamaFlow = extras.getString("chamaFlow");
         }
 
         ChamaHomeFragment chamaHomeFragment = new ChamaHomeFragment();
         Bundle arguments = new Bundle();
         arguments.putString("chamaId", chamaId);
         arguments.putString("chamaName", chamaName);
+        arguments.putString("chamaFlow",chamaFlow);
         chamaHomeFragment.setArguments(arguments);
         replaceFragment(chamaHomeFragment);
 

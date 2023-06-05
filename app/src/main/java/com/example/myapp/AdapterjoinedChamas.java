@@ -48,7 +48,7 @@ public class AdapterjoinedChamas extends RecyclerView.Adapter<AdapterjoinedChama
                 Intent intent = new Intent(context, ChamaActivity.class);
                 intent.putExtra("chamaId", chamasList.get(holder.getAdapterPosition()).getChamaId());
                 intent.putExtra("chamaName", chamasList.get(holder.getAdapterPosition()).getChamaName());
-                intent.putExtra("chamaDescription", chamasList.get(holder.getAdapterPosition()).getChamaDescription());
+                intent.putExtra("chamaFlow", chamasList.get(holder.getAdapterPosition()).getSystemFlow());
                 context.startActivity(intent);
             }
         });

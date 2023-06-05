@@ -249,8 +249,8 @@ public class HomeFragment extends Fragment {
                                 String chamaName = chamaObject.getString("chama_name");
                                 String chamaDescription = chamaObject.getString("chama_description");
                                 String chamaId= String.valueOf(chamaObject.getInt("chama_id"));
-
-                                Chamas chamas = new Chamas(chamaName, chamaDescription,chamaId);
+                                String systemFlow= chamaObject.getString("system_flow");
+                                Chamas chamas = new Chamas(chamaName, chamaDescription,chamaId,systemFlow);
                                 joinedChamasList.add(chamas);
                             }
 

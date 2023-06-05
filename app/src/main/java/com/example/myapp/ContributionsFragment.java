@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -23,6 +26,9 @@ public class ContributionsFragment extends Fragment {
 
     String chamaId;
     Integer userId;
+    private CardView oneCont,allCont;
+    private Button btnNewContribution;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -34,7 +40,59 @@ public class ContributionsFragment extends Fragment {
         }
         userId = Integer.parseInt(SharedPrefManager.getInstance(getContext()).getUserId());
 
+        oneCont= view.findViewById(R.id.cardOneCont);
+        allCont= view.findViewById(R.id.cardAllCont);
+        btnNewContribution= view.findViewById(R.id.btnNewCont);
+
+        oneCont.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IndividualContributions individualContributions= new IndividualContributions();
+                Bundle args = new Bundle();
+                args.putString("chamaId", chamaId);
+                individualContributions.setArguments(args);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.chamaFrameLayout, individualContributions);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
         isLeader();
+
+        allCont.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AllContributions allContributions= new AllContributions();
+                Bundle args = new Bundle();
+                args.putString("chamaId", chamaId);
+                allContributions.setArguments(args);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.chamaFrameLayout, allContributions);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        btnNewContribution.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewContribution newContribution= new NewContribution();
+                Bundle args = new Bundle();
+                args.putString("chamaId", chamaId);
+                newContribution.setArguments(args);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.chamaFrameLayout, newContribution);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+
+
         return view;
     }
 
@@ -48,11 +106,11 @@ public class ContributionsFragment extends Fragment {
                     String message = jsonObject.getString("message");
 
                     if(error==false){
-                        CardView cardView= getView().findViewById(R.id.card3);
-                        cardView.setVisibility(View.VISIBLE);
+                        allCont= getView().findViewById(R.id.cardAllCont);
+                        allCont.setVisibility(View.VISIBLE);
                     }else{
-                        CardView cardView= getView().findViewById(R.id.card3);
-                        cardView.setVisibility(View.INVISIBLE);
+                        allCont= getView().findViewById(R.id.cardAllCont);
+                        allCont.setVisibility(View.INVISIBLE);
                     }
                 } catch (JSONException e) {
                     showToast("Error occurred: " + e.getMessage(), true);

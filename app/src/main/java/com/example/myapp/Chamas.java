@@ -7,16 +7,18 @@ public class Chamas {
     @SerializedName("chama_name") private String chamaName;
     @SerializedName("chama_description") private String chamaDescription;
     @SerializedName("chama_id") private String chamaId;
+    @SerializedName("system_flow") private String systemFlow;
 
     private boolean requestMade;
 
-    public Chamas(String chamaName, String chamaDescription, String chamaId) {
+    public Chamas(String chamaName, String chamaDescription, String chamaId,String systemFlow) {
         this.chamaName= chamaName;
         this.chamaDescription=chamaDescription;
         this.chamaId=chamaId;
+        this.systemFlow= systemFlow;
     }
 
-
+    public String getSystemFlow() {return  systemFlow;}
 
     public String getChamaName() {
         return chamaName;
