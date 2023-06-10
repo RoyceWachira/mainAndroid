@@ -3,10 +3,8 @@ package com.example.myapp;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
-import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -76,16 +74,6 @@ public class NotificationSender  {
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         notificationManager.notify(NOTIFICATION_ID, builder.build());
 
-        Intent broadcastIntent = new Intent("com.example.myapp.NOTIFY");
-        broadcastIntent.putExtra("title", title);
-        broadcastIntent.putExtra("content", content);
-        Log.d("NotificationSender", "Title: " + title);
-        Log.d("NotificationSender", "Content: " + content);
-
-        context.sendOrderedBroadcast(broadcastIntent,null);
-
-        Log.d("Title ",title);
-        Log.d("Content",content);
 
     }
 

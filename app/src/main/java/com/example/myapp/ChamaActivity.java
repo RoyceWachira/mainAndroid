@@ -55,11 +55,21 @@ public class ChamaActivity extends AppCompatActivity {
     }
 
     private void replaceFragment(Fragment fragment) {
+        Bundle arguments = fragment.getArguments();
+        if (arguments == null) {
+            arguments = new Bundle();
+        }
+        arguments.putString("chamaId", chamaId);
+        arguments.putString("chamaName", chamaName);
+        arguments.putString("chamaFlow", chamaFlow);
+        fragment.setArguments(arguments);
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.chamaFrameLayout, fragment);
         fragmentTransaction.commit();
     }
+
 
 
 

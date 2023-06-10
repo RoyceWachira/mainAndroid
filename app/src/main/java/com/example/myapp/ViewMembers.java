@@ -82,14 +82,16 @@ public class ViewMembers extends Fragment {
 
                                 String firstName = membersObject.getString("first_name");
                                 String lastName = membersObject.getString("last_name");
-                                String memberId= String.valueOf(membersObject.getInt("member_id"));
+                                String userId= String.valueOf(membersObject.getInt("user_id"));
                                 String userName = membersObject.getString("username");
                                 String chamaRole = membersObject.getString("chama_role");
                                 String email= membersObject.getString("email");
                                 String dateJoined = membersObject.getString("date_joined");
                                 String phoneNumber= membersObject.getString("phone_number");
+                                String chamaId= membersObject.getString("chama_id");
+                                String memberId= membersObject.getString("member_id");
 
-                                Members members = new Members(chamaRole, memberId, firstName, lastName, email, dateJoined, phoneNumber, userName);
+                                Members members = new Members(chamaRole, userId, firstName, lastName, email, dateJoined, phoneNumber, userName, chamaId, memberId);
                                 membersList.add(members);
                             }
 

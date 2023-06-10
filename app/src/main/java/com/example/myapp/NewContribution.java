@@ -36,7 +36,7 @@ public class NewContribution extends Fragment {
 
     private EditText editText;
     private Button btnContribute;
-    String chamaId;
+    String chamaId,chamaFlow,chamaName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +48,8 @@ public class NewContribution extends Fragment {
         Bundle arguments= getArguments();
         if(arguments != null) {
             chamaId = arguments.getString("chamaId");
+            chamaFlow= arguments.getString("chamaFlow");
+            chamaName= arguments.getString("chamaName");
         }
 
         btnContribute.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +107,8 @@ public class NewContribution extends Fragment {
                                 CompleteContribution completeContribution = new CompleteContribution();
                                 Bundle bundle = new Bundle();
                                 bundle.putInt("chama_id",chamaId);
+                                bundle.putString("chamaName",chamaName);
+                                bundle.putString("chamaFlow",chamaFlow);
                                 bundle.putInt("contribution_id", contributionId);
                                 bundle.putString("contribution_date",contributionDate);
                                 bundle.putString("next_contribution_date",nextContributionDate);
@@ -147,6 +151,20 @@ public class NewContribution extends Fragment {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+//    private void sendJoinChamaNotification() {
+//        int userId = Integer.parseInt(SharedPrefManager.getInstance(getContext()).getUserId());
+//        String notificationContent = "User " + userId + " has made a Contribution ";
+//        String url = Constants.URL_REQUEST_JOIN_CHAMA+ "?chama_id=" + chamaId + "&user_id=" + userId;
+//
+//        // Create an instance of NotificationSender
+//        NotificationSender notificationSender = new NotificationSender();
+//
+//        // Call the sendNotification method
+//        notificationSender.sendNotification(context,String.valueOf(userId), notificationContent, url);
+//
+//
+//    }
 
 
     private void showToast(String message, boolean isError) {

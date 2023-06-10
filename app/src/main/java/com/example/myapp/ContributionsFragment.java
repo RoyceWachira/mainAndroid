@@ -24,7 +24,7 @@ import org.json.JSONObject;
 
 public class ContributionsFragment extends Fragment {
 
-    String chamaId;
+    String chamaId,chamaFlow,chamaName;
     Integer userId;
     private CardView oneCont,allCont;
     private Button btnNewContribution;
@@ -37,6 +37,8 @@ public class ContributionsFragment extends Fragment {
         Bundle arguments = getArguments();
         if(arguments != null) {
             chamaId = arguments.getString("chamaId");
+            chamaFlow= arguments.getString("chamaFlow");
+            chamaName= arguments.getString("chamaName");
         }
         userId = Integer.parseInt(SharedPrefManager.getInstance(getContext()).getUserId());
 
@@ -82,6 +84,8 @@ public class ContributionsFragment extends Fragment {
                 NewContribution newContribution= new NewContribution();
                 Bundle args = new Bundle();
                 args.putString("chamaId", chamaId);
+                args.putString("chamaName",chamaName);
+                args.putString("chamaFlow",chamaFlow);
                 newContribution.setArguments(args);
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

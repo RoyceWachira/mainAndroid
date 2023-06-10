@@ -1,63 +1,177 @@
 package com.example.myapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LoansFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class LoansFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public LoansFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LoansFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static LoansFragment newInstance(String param1, String param2) {
-        LoansFragment fragment = new LoansFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    String chamaId,chamaFlow,chamaName;
+    Integer userId;
+    private CardView myLoans,allLoans,loanRequests;
+    private Button btnReqLoan;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_loans, container, false);
+        View view = inflater.inflate(R.layout.fragment_loans, container, false);
+
+        Bundle arguments = getArguments();
+        if(arguments != null) {
+            chamaId = arguments.getString("chamaId");
+            chamaFlow= arguments.getString("chamaFlow");
+            chamaName= arguments.getString("chamaName");
+        }
+        userId = Integer.parseInt(SharedPrefManager.getInstance(getContext()).getUserId());
+
+        myLoans= view.findViewById(R.id.cardmyLoans);
+        allLoans= view.findViewById(R.id.cardAllLoans);
+        loanRequests= view.findViewById(R.id.cardloanRequests);
+        btnReqLoan= view.findViewById(R.id.btnReqLoan);
+
+        myLoans.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IndividualLoans individualLoans= new IndividualLoans();
+                Bundle args = new Bundle();
+                args.putString("chamaId", chamaId);
+                individualLoans.setArguments(args);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.chamaFrameLayout, individualLoans);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        isLeader();
+
+        allLoans.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AllLoans allLoans= new AllLoans();
+                Bundle args = new Bundle();
+                args.putString("chamaId", chamaId);
+                allLoans.setArguments(args);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.chamaFrameLayout, allLoans);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        loanRequests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoanRequests loanRequests= new LoanRequests();
+                Bundle args = new Bundle();
+                args.putString("chamaId", chamaId);
+                loanRequests.setArguments(args);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.chamaFrameLayout, loanRequests);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        btnReqLoan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewLoan newLoan= new NewLoan();
+                Bundle args = new Bundle();
+                args.putString("chamaId", chamaId);
+                args.putString("chamaName",chamaName);
+                args.putString("chamaFlow",chamaFlow);
+                newLoan.setArguments(args);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.chamaFrameLayout, newLoan);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+
+
+        return view;
+    }
+
+    private void isLeader() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.URL_IS_LEADER+ "?chama_id=" + chamaId+ "&user_id=" + userId, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean error = jsonObject.getBoolean("error");
+                    String message = jsonObject.getString("message");
+
+                    if(error==false){
+                        allLoans= getView().findViewById(R.id.cardAllLoans);
+                        allLoans.setVisibility(View.VISIBLE);
+                        btnReqLoan=getView().findViewById(R.id.btnReqLoan);
+                        btnReqLoan.setVisibility(View.VISIBLE);
+                        loanRequests= getView().findViewById(R.id.cardloanRequests);
+                        loanRequests.setVisibility(View.VISIBLE);
+                    }else{
+                        allLoans= getView().findViewById(R.id.cardAllLoans);
+                        allLoans.setVisibility(View.INVISIBLE);
+                        btnReqLoan=getView().findViewById(R.id.btnReqLoan);
+                        btnReqLoan.setVisibility(View.INVISIBLE);
+                        loanRequests= getView().findViewById(R.id.cardloanRequests);
+                        loanRequests.setVisibility(View.INVISIBLE);
+                    }
+                } catch (JSONException e) {
+                    showToast("Error occurred: " + e.getMessage(), true);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Context context = getContext();
+                showToast(error.getMessage(),true);
+            }
+        });
+
+        Context context = getContext();
+        RequestHandler.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
+    private void showToast(String message, boolean isError) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout;
+
+        if (isError) {
+            layout = inflater.inflate(R.layout.custom_toast_error, getView().findViewById(R.id.toast_message));
+        } else {
+            layout = inflater.inflate(R.layout.custom_toast_success, getView().findViewById(R.id.toast_message));
+        }
+
+        TextView toastMessage = layout.findViewById(R.id.toast_message);
+        toastMessage.setText(message);
+
+        Toast toast = new Toast(getContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
     }
 }

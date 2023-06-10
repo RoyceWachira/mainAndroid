@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bb"
+    tools:context=".NewLoan">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/design_default_color_primary"
+        android:padding="8dp">
+
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:padding="8dp"
+            android:text="New Loan"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:gravity="center"
+        android:text="Request For Soft Loan"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="185dp"
+        android:gravity="left"
+        android:layout_marginLeft="15dp"
+        android:text="Details"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        />
+
+    <EditText
+        android:id="@+id/loanAmount"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:background="@drawable/input_bg"
+        android:drawableLeft="@drawable/ic_baseline_monetization_on_24"
+        android:drawablePadding="10dp"
+        android:hint="Loan Amount (In Shillings)"
+        android:minHeight="48dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="#ECE5E5"
+        android:textColorHint="@color/white" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="380dp"
+        android:layout_height="50dp"
+        android:hint="Loan Repayment Period (In Days)"
+        android:textColorHint="@color/white"
+        android:layout_marginTop="300dp"
+        app:startIconDrawable="@drawable/ic_baseline_access_time_24"
+        android:layout_marginLeft="10dp"
+        app:startIconTint="@color/white"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/input_bg"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <AutoCompleteTextView
+            android:id="@+id/autoComplete_txtPeriod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorLink="@color/white"
+            android:inputType="none"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/btnRequestLoan"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_bg"
+        android:layout_marginTop="420dp"
+        android:gravity="center"
+        android:layout_marginLeft="100dp"
+        android:text="Request" />
+
+
+
+</FrameLayout>

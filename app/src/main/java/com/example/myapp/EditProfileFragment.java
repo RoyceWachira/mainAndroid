@@ -187,7 +187,6 @@ public class EditProfileFragment extends Fragment {
                                 updateMail.setText(email);
                                 updateUsername.setText(userName);
                                 updatePhoneNumber.setText(phoneNumber);
-                                showToast(message, false);
 
                             } else {
                                 // User data retrieval failed

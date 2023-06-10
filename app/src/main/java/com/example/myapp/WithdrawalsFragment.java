@@ -24,7 +24,7 @@ import org.json.JSONObject;
 
 public class WithdrawalsFragment extends Fragment {
 
-    String chamaId;
+    String chamaId,chamaName,chamaFlow;
     Integer userId;
     private CardView withdrawals;
     private Button btnNewWithdrawal;
@@ -37,6 +37,8 @@ public class WithdrawalsFragment extends Fragment {
         Bundle arguments = getArguments();
         if(arguments != null) {
             chamaId = arguments.getString("chamaId");
+            chamaFlow= arguments.getString("chamaFlow");
+            chamaName= arguments.getString("chamaName");
         }
         userId = Integer.parseInt(SharedPrefManager.getInstance(getContext()).getUserId());
 
@@ -46,13 +48,13 @@ public class WithdrawalsFragment extends Fragment {
         withdrawals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IndividualContributions individualContributions= new IndividualContributions();
+                Allwithdrawals allwithdrawals= new Allwithdrawals();
                 Bundle args = new Bundle();
                 args.putString("chamaId", chamaId);
-                individualContributions.setArguments(args);
+                allwithdrawals.setArguments(args);
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.chamaFrameLayout, individualContributions);
+                fragmentTransaction.replace(R.id.chamaFrameLayout, allwithdrawals);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
@@ -64,13 +66,15 @@ public class WithdrawalsFragment extends Fragment {
         btnNewWithdrawal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewContribution newContribution= new NewContribution();
+                NewWithdrawal newWithdrawal= new NewWithdrawal();
                 Bundle args = new Bundle();
                 args.putString("chamaId", chamaId);
-                newContribution.setArguments(args);
+                args.putString("chamaName",chamaName);
+                args.putString("chamaFlow",chamaFlow);
+                newWithdrawal.setArguments(args);
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.chamaFrameLayout, newContribution);
+                fragmentTransaction.replace(R.id.chamaFrameLayout, newWithdrawal);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }

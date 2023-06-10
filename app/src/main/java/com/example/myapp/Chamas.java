@@ -8,14 +8,18 @@ public class Chamas {
     @SerializedName("chama_description") private String chamaDescription;
     @SerializedName("chama_id") private String chamaId;
     @SerializedName("system_flow") private String systemFlow;
+    @SerializedName("contribution_target") private String contributionTarget;
+    @SerializedName("contribution_period") private String contributionPeriod;
 
     private boolean requestMade;
 
-    public Chamas(String chamaName, String chamaDescription, String chamaId,String systemFlow) {
+    public Chamas(String chamaName, String chamaDescription, String chamaId,String systemFlow,String contributionPeriod,String contributionTarget) {
         this.chamaName= chamaName;
         this.chamaDescription=chamaDescription;
         this.chamaId=chamaId;
         this.systemFlow= systemFlow;
+        this.contributionPeriod= contributionPeriod;
+        this.contributionTarget= contributionTarget;
     }
 
     public String getSystemFlow() {return  systemFlow;}

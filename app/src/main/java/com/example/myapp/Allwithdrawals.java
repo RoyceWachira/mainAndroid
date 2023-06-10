@@ -31,16 +31,16 @@ public class Allwithdrawals extends Fragment {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private List<Contributions> contributionsList;
-    private AdapterAllContributions adapterAllContributions;
+    private List<Withdrawals> withdrawalsList;
+    private AdapterAllWithdrawals adapterAllWithdrawals;
     private String chamaId;
     private CardView cardView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_all_contributions, container, false);
+        View view = inflater.inflate(R.layout.fragment_allwithdrawals, container, false);
 
-        cardView= view.findViewById(R.id.cardViewContributions);
+        cardView= view.findViewById(R.id.cardViewWithdrawals);
 
         Bundle arguments = getArguments();
         if(arguments != null) {
@@ -52,19 +52,19 @@ public class Allwithdrawals extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        contributionsList = new ArrayList<>();
+        withdrawalsList = new ArrayList<>();
 
-        adapterAllContributions = new AdapterAllContributions(contributionsList, getContext());
-        recyclerView.setAdapter(adapterAllContributions);
+        adapterAllWithdrawals = new AdapterAllWithdrawals(withdrawalsList, getContext());
+        recyclerView.setAdapter(adapterAllWithdrawals);
 
-        viewAllContributions();
+        viewAllWithdrawals();
 
         return view;
     }
 
-    private void viewAllContributions() {
+    private void viewAllWithdrawals() {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.URL_ALL_CONRIBUTIONS+ "?chama_id=" + chamaId, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.URL_ALL_WITHDRAWALS+ "?chama_id=" + chamaId, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -74,30 +74,30 @@ public class Allwithdrawals extends Fragment {
 
                     // Check if the backend response indicates a successful request
                     if (jsonObject.getBoolean("error")==false) {
-                        JSONArray contributionsArray = jsonObject.getJSONArray("allcontributions");
+                        JSONArray withdrawalsArray = jsonObject.getJSONArray("allwithdrawals");
 
-                        contributionsList.clear();
+                        withdrawalsList.clear();
 
-                        if (contributionsArray.length() > 0) {
-                            TextView noContributions = getView().findViewById(R.id.noContributions);
-                            noContributions.setVisibility(View.GONE);
+                        if (withdrawalsArray.length() > 0) {
+                            TextView nowithdrawals = getView().findViewById(R.id.nowithdrawals);
+                            nowithdrawals.setVisibility(View.GONE);
 
-                            for (int i = 0; i < contributionsArray.length(); i++) {
-                                JSONObject contributionsObject = contributionsArray.getJSONObject(i);
+                            for (int i = 0; i < withdrawalsArray.length(); i++) {
+                                JSONObject withdrawalsObject = withdrawalsArray.getJSONObject(i);
 
-                                String contributionAmount = contributionsObject.getString("contribution_amount");
-                                String contributionDate = contributionsObject.getString("contribution_date");
-                                String contributionId= String.valueOf(contributionsObject.getInt("contribution_id"));
+                                String withdrawalsAmount = withdrawalsObject.getString("withdrawal_amount");
+                                String withdrawalsReason = withdrawalsObject.getString("withdrawal_reason");
+                                String withdrawalsId= String.valueOf(withdrawalsObject.getInt("withdrawal_id"));
 
-                                Contributions contributions = new Contributions(contributionAmount, contributionId, contributionDate);
-                                contributionsList.add(contributions);
+                                Withdrawals withdrawals = new Withdrawals(withdrawalsAmount, withdrawalsId, withdrawalsReason);
+                                withdrawalsList.add(withdrawals);
                             }
 
-                            adapterAllContributions.setContributionsList(contributionsList);
-                            adapterAllContributions.notifyDataSetChanged();
+                            adapterAllWithdrawals.setWithdrawalsList(withdrawalsList);
+                            adapterAllWithdrawals.notifyDataSetChanged();
                         }else {
-                            TextView noContributions = getView().findViewById(R.id.noContributions);
-                            noContributions.setVisibility(View.VISIBLE);
+                            TextView nowithdrawals = getView().findViewById(R.id.nowithdrawals);
+                            nowithdrawals.setVisibility(View.VISIBLE);
                             cardView.setVisibility(View.GONE);
                         }
                     }

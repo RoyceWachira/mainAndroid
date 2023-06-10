@@ -15,7 +15,7 @@ public class CompleteContribution extends Fragment {
 
     private TextView txtContDate,txtContAmount,txtNextCont;
     private Button btnDone,btnPrint;
-    String chamaId;
+    String chamaId,chamaName,chamaFlow;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -25,6 +25,8 @@ public class CompleteContribution extends Fragment {
         if(arguments != null) {
             String id = arguments.getString("contribution_id");
             chamaId = String.valueOf(arguments.getInt("chama_id"));
+            chamaFlow= arguments.getString("chamaFlow");
+            chamaName= arguments.getString("chamaName");
             String amount = arguments.getString("contribution_amount");
             String date = arguments.getString("contribution_date");
             String next = arguments.getString("contribution_date");
@@ -49,6 +51,8 @@ public class CompleteContribution extends Fragment {
                 ChamaHomeFragment chamaHomeFragment= new ChamaHomeFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("chamaId",chamaId);
+                bundle.putString("chamaName",chamaName);
+                bundle.putString("chamaFlow",chamaFlow);
                 chamaHomeFragment.setArguments(bundle);
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

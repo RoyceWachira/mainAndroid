@@ -2,7 +2,6 @@ package com.example.myapp;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,8 +53,6 @@ public class ChamaHomeFragment extends Fragment {
             chamaName = arguments.getString("chamaName");
             chamaFlow= arguments.getString("chamaFlow");
 
-            chamaHeader = view.findViewById(R.id.txtChamaTitle);
-            chamaHeader.setText(chamaName);
             txtChama = view.findViewById(R.id.txtChama);
             txtChama.setText(chamaName);
         }
@@ -72,10 +69,10 @@ public class ChamaHomeFragment extends Fragment {
         fab4= view.findViewById(R.id.floatingLoan);
         fab5= view.findViewById(R.id.floatingMeet);
 
-        String[] systemTypeArray = checkSystem();
-        String systemType = (systemTypeArray != null && systemTypeArray.length > 0) ? systemTypeArray[0] : null;
-
-        Log.d("TAG", "System Type: " + systemType);
+//        String[] systemTypeArray = checkSystem();
+//        String systemType = (systemTypeArray != null && systemTypeArray.length > 0) ? systemTypeArray[0] : null;
+//
+//        Log.d("TAG", "System Type: " + systemType);
 
         if(chamaFlow.equals("linear")){
             fab6 = view.findViewById(R.id.floatingInvest);
@@ -83,15 +80,15 @@ public class ChamaHomeFragment extends Fragment {
             fab7 = view.findViewById(R.id.floatingAllocate);
         }
 
-        if (systemType != null && systemType.equals("linear")) {
-            fab6 = view.findViewById(R.id.floatingInvest);
-        } else if (systemType != null && systemType.equals("merry-go-round")) {
-            fab7 = view.findViewById(R.id.floatingAllocate);
-        } else if (systemType != null && systemType.equals("not_found")) {
-            Log.d("TAG", "There's Nothing ");
-        } else {
-            Log.d("TAG", "There's Nothing ");
-        }
+//        if (systemType != null && systemType.equals("linear")) {
+//            fab6 = view.findViewById(R.id.floatingInvest);
+//        } else if (systemType != null && systemType.equals("merry-go-round")) {
+//            fab7 = view.findViewById(R.id.floatingAllocate);
+//        } else if (systemType != null && systemType.equals("not_found")) {
+//            Log.d("TAG", "There's Nothing ");
+//        } else {
+//            Log.d("TAG", "There's Nothing ");
+//        }
 
 
         // Initialize animations
@@ -109,6 +106,8 @@ public class ChamaHomeFragment extends Fragment {
                 ContributionsFragment contributionsFragment= new ContributionsFragment();
                 Bundle args = new Bundle();
                 args.putString("chamaId", chamaId);
+                args.putString("chamaName",chamaName);
+                args.putString("chamaFlow",chamaFlow);
                 contributionsFragment.setArguments(args);
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -125,6 +124,8 @@ public class ChamaHomeFragment extends Fragment {
                 WithdrawalsFragment withdrawalsFragment= new WithdrawalsFragment();
                 Bundle args = new Bundle();
                 args.putString("chamaId", chamaId);
+                args.putString("chamaName",chamaName);
+                args.putString("chamaFlow",chamaFlow);
                 withdrawalsFragment.setArguments(args);
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -141,6 +142,8 @@ public class ChamaHomeFragment extends Fragment {
                 FinesFragment finesFragment= new FinesFragment();
                 Bundle args = new Bundle();
                 args.putString("chamaId", chamaId);
+                args.putString("chamaName",chamaName);
+                args.putString("chamaFlow",chamaFlow);
                 finesFragment.setArguments(args);
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -157,6 +160,8 @@ public class ChamaHomeFragment extends Fragment {
                 LoansFragment loansFragment= new LoansFragment();
                 Bundle args = new Bundle();
                 args.putString("chamaId", chamaId);
+                args.putString("chamaName",chamaName);
+                args.putString("chamaFlow",chamaFlow);
                 loansFragment.setArguments(args);
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -172,6 +177,8 @@ public class ChamaHomeFragment extends Fragment {
                 MeetingsFragment meetingsFragment= new MeetingsFragment();
                 Bundle args = new Bundle();
                 args.putString("chamaId", chamaId);
+                args.putString("chamaName",chamaName);
+                args.putString("chamaFlow",chamaFlow);
                 meetingsFragment.setArguments(args);
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -359,7 +366,7 @@ public class ChamaHomeFragment extends Fragment {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     systemType[0] = jsonObject.getString("system").toString(); // Assign the system type to the array element
-                    showToast(String.valueOf(systemType[0].toString()),false);
+
                 } catch (JSONException e) {
                     showToast("Error occurred: " + e.getMessage(), true);
                 }

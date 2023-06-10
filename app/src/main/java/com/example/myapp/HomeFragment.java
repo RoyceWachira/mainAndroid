@@ -250,7 +250,10 @@ public class HomeFragment extends Fragment {
                                 String chamaDescription = chamaObject.getString("chama_description");
                                 String chamaId= String.valueOf(chamaObject.getInt("chama_id"));
                                 String systemFlow= chamaObject.getString("system_flow");
-                                Chamas chamas = new Chamas(chamaName, chamaDescription,chamaId,systemFlow);
+                                String contributionPeriod= chamaObject.getString("contribution_period");
+                                String contributionTarget= chamaObject.getString("contribution_target");
+
+                                Chamas chamas = new Chamas(chamaName, chamaDescription,chamaId,systemFlow,contributionPeriod,contributionTarget);
                                 joinedChamasList.add(chamas);
                             }
 

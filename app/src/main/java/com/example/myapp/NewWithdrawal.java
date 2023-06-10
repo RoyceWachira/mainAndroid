@@ -36,7 +36,7 @@ public class NewWithdrawal extends Fragment {
 
     private EditText withdrawReason,withdrawAmount;
     private Button btnmakeWithdrawal;
-    String chamaId;
+    String chamaId,chamaFlow,chamaName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,6 +49,8 @@ public class NewWithdrawal extends Fragment {
         Bundle arguments= getArguments();
         if(arguments != null) {
             chamaId = arguments.getString("chamaId");
+            chamaFlow= arguments.getString("chamaFlow");
+            chamaName= arguments.getString("chamaName");
         }
 
         btnmakeWithdrawal.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +108,8 @@ public class NewWithdrawal extends Fragment {
                                 CompleteWithdrawal completeWithdrawal = new CompleteWithdrawal();
                                 Bundle bundle = new Bundle();
                                 bundle.putInt("chama_id",chamaId);
+                                bundle.putString("chamaName",chamaName);
+                                bundle.putString("chamaFlow",chamaFlow);
                                 bundle.putInt("withdrawalId", withdrawalId);
                                 bundle.putString("withdrawalReason",withdrawalReason);
                                 bundle.putString("withdrawalAmount",withdrawalAmount);

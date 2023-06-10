@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bb"
+    tools:context=".NewWithdrawal">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/design_default_color_primary"
+        android:padding="8dp">
+
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:padding="8dp"
+            android:text="Charge Fine"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:gravity="center"
+        android:text="Charge Fine"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="185dp"
+        android:gravity="left"
+        android:layout_marginLeft="15dp"
+        android:text="Details"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        />
+
+    <EditText
+        android:id="@+id/fineAmount"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:background="@drawable/input_bg"
+        android:drawableLeft="@drawable/ic_baseline_monetization_on_24"
+        android:drawablePadding="10dp"
+        android:hint="Fine Amount(In Shillings)"
+        android:minHeight="48dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="#ECE5E5"
+        android:textColorHint="@color/white" />
+
+    <EditText
+        android:id="@+id/fineReason"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:background="@drawable/input_bg"
+        android:drawableLeft="@drawable/ic_baseline_description_24"
+        android:drawablePadding="10dp"
+        android:hint="Fine Reasons"
+        android:minHeight="48dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="290dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="#ECE5E5"
+        android:textColorHint="@color/white" />
+
+
+    <Button
+        android:id="@+id/btnCharge"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_bg"
+        android:layout_marginTop="420dp"
+        android:gravity="center"
+        android:layout_marginLeft="100dp"
+        android:text="Charge" />
+
+
+
+</FrameLayout>

@@ -1,6 +1,5 @@
 package com.example.myapp;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -38,7 +37,6 @@ public class CreateChamaFragment extends Fragment {
 
     private EditText editChamaName, editChamaDesc, editContTarget;
     private Button btnCreate;
-    private ProgressDialog progressDialog;
 
     String[] contributionPeriod = {String.valueOf(15), String.valueOf(30), String.valueOf(45),String.valueOf(60)};
     String[] systemFlow= {"merry-go-round","linear"};
@@ -141,7 +139,6 @@ public class CreateChamaFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
                 String errorMessage = error != null && error.getMessage() != null ? error.getMessage() : "Unknown error";
                 Log.e("Error", "Error occurred", error);
                 showToast("Error occurred: " + errorMessage, true);

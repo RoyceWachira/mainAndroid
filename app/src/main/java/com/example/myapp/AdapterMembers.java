@@ -57,6 +57,8 @@ public class AdapterMembers extends RecyclerView.Adapter<AdapterMembers.MyViewHo
                 bundle.putString("dateJoined", member.getDateJoined());
                 bundle.putString("email", member.getEmail());
                 bundle.putString("phoneNumber", member.getPhoneNumber());
+                bundle.putString("chamaId", member.getChamaId());
+                bundle.putString("memberId",member.getMemberId());
                 memberDetails.setArguments(bundle);
 
                 // Replace the current fragment with the new fragment
@@ -92,7 +94,7 @@ public class AdapterMembers extends RecyclerView.Adapter<AdapterMembers.MyViewHo
             imageView=itemView.findViewById(R.id.leader);
         }
         public void bind(Members member) {
-            if (member.getChamaRole().equals("Chairperson") || member.getChamaRole().equals("Vice Chairperson") || member.getChamaRole().equals("Treasurer") || member.getChamaRole().equals("Secretary") ) {
+            if (member.getChamaRole().equals("Chairperson") || member.getChamaRole().equals("Vice ChairPerson") || member.getChamaRole().equals("Treasurer") || member.getChamaRole().equals("Secretary") ) {
                 imageView.setVisibility(View.VISIBLE);
             } else {
                 imageView.setVisibility(View.GONE);

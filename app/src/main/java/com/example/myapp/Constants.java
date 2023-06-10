@@ -2,7 +2,7 @@ package com.example.myapp;
 
 public class Constants {
 
-    private static final String ROOT_URL="http://192.168.100.7/Api/";
+    private static final String ROOT_URL="http://192.168.100.4/Api/";
 
     public static final String URL_REGISTER= ROOT_URL+"register.php";
     public static final String URL_LOGIN= ROOT_URL+"login.php";
@@ -31,4 +31,24 @@ public class Constants {
     public static final String URL_CHECK_SYSTEM_FLOW= ROOT_URL+"checkSystemFlow.php";
     public static final String URL_MAKE_WITHDRAWAL= ROOT_URL+"makeWithdrawal.php";
     public static final String URL_IS_TREASURER= ROOT_URL+"isTreasurer.php";
+    public static final String URL_ALL_WITHDRAWALS= ROOT_URL+"getAllWithdrawals.php";
+    public static final String URL_ALL_FINES= ROOT_URL+"getAllFines.php";
+    public static final String URL_CHARGE_FINE= ROOT_URL+"chargeFine.php";
+    public static final String URL_ALL_LOANS= ROOT_URL+"getAllLoans.php";
+    public static final String URL_REQUEST_LOAN= ROOT_URL+"loanrequest.php";
+    public static final String URL_GET_REQUESTED_LOANS= ROOT_URL+"getLoanRequests.php";
+    public static final String URL_APPROVE_LOAN= ROOT_URL+"approveLoan.php";
+    public static final String URL_REJECT_LOAN= ROOT_URL+"rejectLoan.php";
+    public static final String URL_ALL_MEETINGS= ROOT_URL+"getAllMeetings.php";
+    public static final String URL_CREATE_MEETING= ROOT_URL+"createMeeting.php";
+    public static final String URL_JOIN_REQUESTS= ROOT_URL+"getJoinRequests.php";
+    public static final String URL_ACCEPT_REQUEST= ROOT_URL+"approveRequest.php";
+    public static final String URL_REJECT_REQUEST= ROOT_URL+"rejectRequest.php";
+    public static final String URL_GET_CHAMA= ROOT_URL+"getchama.php";
+    public static final String URL_IS_CHAIR_OR_VICE= ROOT_URL+"isChairOrVice.php";
+    public static final String URL_CHANGE_ROLE= ROOT_URL+"updateRole.php";
+    public static final String URL_DEMOTE= ROOT_URL+"demote.php";
+    public static final String URL_MAKE_CHAIR= ROOT_URL+"makeChair.php";
+    public static final String URL_GET_NOTIFICATIONS= ROOT_URL+"getAllNotifications.php";
+    public static final String URL_UPDATE_CHAMA= ROOT_URL+"updateChama.php";
 }

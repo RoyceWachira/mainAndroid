@@ -1,12 +1,13 @@
 package com.example.myapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
+import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,12 +18,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
@@ -101,13 +103,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(userName) || TextUtils.isEmpty(password)
                 || TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName)
                 || TextUtils.isEmpty(confirmPassword) || TextUtils.isEmpty(phoneNumber) || TextUtils.isEmpty(gender)) {
-            Toast.makeText(getApplicationContext(), "Please fill in all required fields", Toast.LENGTH_SHORT).show();
+            showToast("Please fill in all required fields",true);
             return;
         }
 
         // Check if passwords match
         if (!password.equals(confirmPassword)) {
-            Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
+            showToast("Passwords do not match",true);
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            showToast("Please enter a valid email address", true);
             return;
         }
 
@@ -116,14 +123,25 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.URL_REGISTER, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.d("Response",response);
                 progressDialog.dismiss();
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
+                    boolean error = jsonObject.getBoolean("error");
+                    String message = jsonObject.getString("message");
 
-                    Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                    if(error==false){
+                        showToast(message,false);
+                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }else {
+                        showToast(message,true);
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    showToast("Error occurred: " + e.getMessage(), true);
                 }
             }
         }, new Response.ErrorListener() {
@@ -141,7 +159,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 params.put("password",password);
                 params.put("firstName",firstName);
                 params.put("lastName",lastName);
-                params.put("confirmPassword",confirmPassword);
                 params.put("phoneNumber",phoneNumber);
                 params.put("gender", String.valueOf(gender));
 
@@ -153,6 +170,28 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+    private void showToast(String message, boolean isError) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout;
+
+        if (isError) {
+            layout = inflater.inflate(R.layout.custom_toast_error, findViewById(R.id.toast_message));
+        } else {
+            layout = inflater.inflate(R.layout.custom_toast_success, findViewById(R.id.toast_message));
+        }
+
+        TextView toastMessage = layout.findViewById(R.id.toast_message);
+        toastMessage.setText(message);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
+    }
+
+    private boolean isValidEmail(String email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
 
     @Override
     public void onClick(View view){

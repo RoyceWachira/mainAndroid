@@ -91,6 +91,7 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.MyViewHold
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.URL_REQUEST_JOIN_CHAMA+ "?chama_id=" + chamaId + "&user_id=" + userId, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Log.d("res",response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean error = jsonObject.getBoolean("error");
@@ -118,8 +119,8 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.MyViewHold
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("chama_id", String.valueOf(chamaId));
-                params.put("user_id", String.valueOf(userId));
+                params.put("chamaId", String.valueOf(chamaId));
+                params.put("userId", String.valueOf(userId));
                 return params;
             }
         };

@@ -89,8 +89,9 @@ public class IndividualLoans extends Fragment {
                                 String loanId= String.valueOf(loansObject.getInt("loan_id"));
                                 String amountPayable = loansObject.getString("amount_payable");
                                 String dueAt = loansObject.getString("due_at");
+                                String chamaId = String.valueOf(loansObject.getInt("chama_id"));
 
-                                Loans loans = new Loans(loanAmount, loanId, loanStatus, amountPayable, dueAt);
+                                Loans loans = new Loans(loanAmount, loanId, loanStatus, amountPayable, dueAt,chamaId);
                                 loansList.add(loans);
                             }
 

@@ -167,6 +167,60 @@
         android:textSize="15sp"
         />
 
+    <Button
+        android:visibility="invisible"
+        android:id="@+id/btnDemote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_bg"
+        android:layout_marginTop="500dp"
+        android:gravity="center"
+        android:layout_marginLeft="155dp"
+        android:text="Demote" />
+    <Button
+        android:visibility="invisible"
+        android:id="@+id/btnChair"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_bg"
+        android:layout_marginTop="560dp"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:text="Make Chairperson" />
+
+
+    <Button
+        android:visibility="invisible"
+        android:id="@+id/btnTreasurer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_bg"
+        android:layout_marginTop="630dp"
+        android:gravity="center"
+        android:layout_marginLeft="15dp"
+        android:text="Make Treasurer" />
+
+    <Button
+        android:visibility="invisible"
+        android:id="@+id/btnViceChair"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_bg"
+        android:layout_marginTop="560dp"
+        android:gravity="center"
+        android:layout_marginLeft="215dp"
+        android:text="Make ViceChair" />
+
+    <Button
+        android:visibility="invisible"
+        android:id="@+id/btnSecretary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_bg"
+        android:layout_marginTop="630dp"
+        android:gravity="center"
+        android:layout_marginLeft="215dp"
+        android:text="Make Secretary" />
 
 
 
