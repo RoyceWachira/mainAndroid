@@ -128,15 +128,11 @@ public class LoansFragment extends Fragment {
                     if(error==false){
                         allLoans= getView().findViewById(R.id.cardAllLoans);
                         allLoans.setVisibility(View.VISIBLE);
-                        btnReqLoan=getView().findViewById(R.id.btnReqLoan);
-                        btnReqLoan.setVisibility(View.VISIBLE);
                         loanRequests= getView().findViewById(R.id.cardloanRequests);
                         loanRequests.setVisibility(View.VISIBLE);
                     }else{
                         allLoans= getView().findViewById(R.id.cardAllLoans);
                         allLoans.setVisibility(View.INVISIBLE);
-                        btnReqLoan=getView().findViewById(R.id.btnReqLoan);
-                        btnReqLoan.setVisibility(View.INVISIBLE);
                         loanRequests= getView().findViewById(R.id.cardloanRequests);
                         loanRequests.setVisibility(View.INVISIBLE);
                     }

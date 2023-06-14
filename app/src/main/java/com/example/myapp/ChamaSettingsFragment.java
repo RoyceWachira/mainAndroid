@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +18,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -81,9 +84,53 @@ public class ChamaSettingsFragment extends Fragment {
         leave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Leave Chama");
+                builder.setMessage("Are you sure you want to leave this Chama?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String userId = SharedPrefManager.getInstance(getContext()).getUserId();
+                        String url = Constants.URL_LEAVE_CHAMA + "?user_id=" + userId + "&chama_id=" + chamaId;
 
+                        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    boolean error = jsonObject.getBoolean("error");
+                                    String message = jsonObject.getString("message");
+
+                                    if (error) {
+                                        showToast(message, true);
+                                    } else {
+                                        showToast(message, false);
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    showToast("Error Occurred: " + e.getMessage(), true);
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                String errorMessage = error != null && error.getMessage() != null ? error.getMessage() : "Unknown error";
+                                Log.e("Error", "Error occurred", error);
+                                showToast("Error occurred: " + errorMessage, true);
+                            }
+                        });
+
+                        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+                        requestQueue.add(stringRequest);
+                    }
+                });
+
+                builder.setNegativeButton("No", null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
+
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override

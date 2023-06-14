@@ -65,10 +65,6 @@ public class SharedPrefManager {
         return sharedPreferences.getString(KEY_USER_NAME, null);
     }
 
-    public int sessionInfo() {
-        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getInt(SESSION_KEY, -1);
-    }
 
 
 }

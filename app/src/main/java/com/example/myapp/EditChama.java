@@ -91,8 +91,8 @@ public class EditChama extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String chamaName= editChamaDesc.getText().toString().trim();
-                String chamaDescription= editChamaName.getText().toString().trim();
+                String chamaName= editChamaName.getText().toString().trim();
+                String chamaDescription= editChamaDesc.getText().toString().trim();
                 String contributionTarget= editContTarget.getText().toString().trim();
                 String contPeriod= editPeriod.getEditText().getText().toString().trim();
                 String sysFlow= editFlow.getEditText().getText().toString().trim();

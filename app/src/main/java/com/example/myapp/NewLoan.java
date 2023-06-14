@@ -1,6 +1,7 @@
 package com.example.myapp;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -113,7 +114,7 @@ public class NewLoan extends Fragment {
                             } else {
 
                                 showToast(message, false);
-
+                                sendNotification();
                                 // Pass the contribution ID to the next fragment
                                 ChamaHomeFragment chamaHomeFragment = new ChamaHomeFragment();
                                 Bundle bundle = new Bundle();
@@ -158,6 +159,58 @@ public class NewLoan extends Fragment {
         builder.setNegativeButton("No", null);
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void sendNotification() {
+        int userId = Integer.parseInt(SharedPrefManager.getInstance(getContext()).getUserId());
+        getName(String.valueOf(userId), new NameCallback() {
+            @Override
+            public void onNameReceived(String name) {
+                String notificationContent = "Member " + name + " has requested for a loan";
+                String url = Constants.URL_REQUEST_LOAN + "?user_id=" + userId + "&chama_id=" + chamaId;
+
+                // Create an instance of NotificationSender
+                NotificationSender notificationSender = new NotificationSender();
+
+                // Call the sendNotification method
+                notificationSender.sendNotification(getContext(), String.valueOf(userId), notificationContent, url);
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                // Handle the error
+                // Display or log the error message
+            }
+        });
+    }
+
+    interface NameCallback {
+        void onNameReceived(String name);
+        void onError(String errorMessage);
+    }
+
+
+    private void getName(String userId, final NameCallback callback) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.URL_GET_NAME + "?user_id=" + userId, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String name = jsonObject.getString("name");
+                    callback.onNameReceived(name);
+                } catch (JSONException e) {
+                    callback.onError("Error occurred: " + e.getMessage());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callback.onError(error.getMessage());
+            }
+        });
+
+        Context context = getContext();
+        RequestHandler.getInstance(context).addToRequestQueue(stringRequest);
     }
 
 

@@ -1,9 +1,5 @@
 package com.example.myapp;
 
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -77,8 +73,8 @@ public class CompleteFine extends Fragment {
             txtFineStatus.setText(status);
         }
 
-        btnDone=view.findViewById(R.id.btnContDone);
-        btnPrint= view.findViewById(R.id.btnContPrint);
+        btnDone=view.findViewById(R.id.btnfineDone);
+        btnPrint= view.findViewById(R.id.btnfinePrint);
 
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +110,7 @@ public class CompleteFine extends Fragment {
 
     private void createPdf () throws FileNotFoundException {
         String pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
-        File file = new File(pdfPath, "contributionsPDF.pdf");
+        File file = new File(pdfPath, "FinesPDF.pdf");
         OutputStream outputStream = new FileOutputStream(file);
 
         PdfWriter writer = new PdfWriter(outputStream);
@@ -146,23 +142,23 @@ public class CompleteFine extends Fragment {
 
             // Add table rows with the argument values
 
-            table1.addCell(new Cell().add(new Paragraph("Chama Name").setFontSize(16).setFontColor(ColorConstants.WHITE)).setBorder(Border.NO_BORDER));
-            table1.addCell(new Cell().add(new Paragraph(chamaName).setFontSize(16).setFontColor(ColorConstants.WHITE)).setBorder(Border.NO_BORDER));
+            table1.addCell(new Cell().add(new Paragraph("Chama Name").setFontSize(25).setFontColor(ColorConstants.WHITE)).setBorder(Border.NO_BORDER));
+            table1.addCell(new Cell().add(new Paragraph(chamaName).setFontSize(25).setFontColor(ColorConstants.WHITE)).setBorder(Border.NO_BORDER));
 
             DeviceRgb setColour = new DeviceRgb(8, 106, 119);
             float columnWidth2[] = {220, 120, 100, 120};
             Table table2 = new Table(columnWidth2);
             table2.setMargin(20);
 
-            table2.addCell(new Cell().add(new Paragraph("Fine Amount").setFontSize(14).setFontColor(ColorConstants.WHITE)));
-            table2.addCell(new Cell().add(new Paragraph("Fine Reason").setFontSize(14).setFontColor(ColorConstants.WHITE)));
-            table2.addCell(new Cell().add(new Paragraph("Date Fined").setFontSize(14).setFontColor(ColorConstants.WHITE)));
-            table2.addCell(new Cell().add(new Paragraph("Fine Status").setFontSize(14).setFontColor(ColorConstants.WHITE)));
+            table2.addCell(new Cell().add(new Paragraph("Fine Amount").setFontSize(20).setFontColor(ColorConstants.WHITE)));
+            table2.addCell(new Cell().add(new Paragraph("Fine Reason").setFontSize(20).setFontColor(ColorConstants.WHITE)));
+            table2.addCell(new Cell().add(new Paragraph("Date Fined").setFontSize(20).setFontColor(ColorConstants.WHITE)));
+            table2.addCell(new Cell().add(new Paragraph("Fine Status").setFontSize(20).setFontColor(ColorConstants.WHITE)));
 
-            table2.addCell(new Cell().add(new Paragraph(amount).setFontSize(14).setFontColor(ColorConstants.WHITE)));
-            table2.addCell(new Cell().add(new Paragraph(reason).setFontSize(14).setFontColor(ColorConstants.WHITE)));
-            table2.addCell(new Cell().add(new Paragraph(date).setFontSize(14).setFontColor(ColorConstants.WHITE)));
-            table2.addCell(new Cell().add(new Paragraph(status).setFontSize(14).setFontColor(ColorConstants.WHITE)));
+            table2.addCell(new Cell().add(new Paragraph(amount).setFontSize(20).setFontColor(ColorConstants.WHITE)));
+            table2.addCell(new Cell().add(new Paragraph(reason).setFontSize(20).setFontColor(ColorConstants.WHITE)));
+            table2.addCell(new Cell().add(new Paragraph(date).setFontSize(20).setFontColor(ColorConstants.WHITE)));
+            table2.addCell(new Cell().add(new Paragraph(status).setFontSize(20).setFontColor(ColorConstants.WHITE)));
 
 
             document.add(image.setFixedPosition(0, 0));
@@ -171,13 +167,6 @@ public class CompleteFine extends Fragment {
             document.close();
             showToast("Pdf Generated Successfully",false);
         }
-    }
-
-    private boolean checkPermission() {
-        // checking of permissions.
-        int permission1 = ContextCompat.checkSelfPermission(getContext(), WRITE_EXTERNAL_STORAGE);
-        int permission2 = ContextCompat.checkSelfPermission(getContext(), READ_EXTERNAL_STORAGE);
-        return permission1 == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED;
     }
 
 
