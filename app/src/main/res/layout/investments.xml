@@ -9,7 +9,7 @@
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardMeetings"
+        android:id="@+id/cardIndividualLoan"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_margin="5dp"
@@ -27,18 +27,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
-            android:text="Meeting Date:"
+            android:text="Id:"
             android:textSize="15sp"
             android:textColor="@color/white"
             />
 
         <TextView
-            android:id="@+id/txtMeetDate"
+            android:id="@+id/txtinvId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="105dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="15dp"
-            android:text="Date"
+            android:text="Id"
             android:textSize="15sp"
             android:textColor="@color/white"
             />
@@ -51,18 +51,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="35dp"
-            android:text="Meeting Venue:"
+            android:text="Investment Amount:"
             android:textSize="15sp"
             android:textColor="@color/white"
             />
 
         <TextView
-            android:id="@+id/txtMeetVenue"
+            android:id="@+id/txtinvamount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="115dp"
+            android:layout_marginLeft="150dp"
             android:layout_marginTop="35dp"
-            android:text="Venue"
+            android:text="Amount"
             android:textSize="15sp"
             android:textColor="@color/white"
             />
@@ -73,19 +73,19 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="55dp"
-            android:text="Meeting Purpose:"
+            android:text="Investment Area:"
             android:textSize="15sp"
             android:textColor="@color/white"
             />
 
 
         <TextView
-            android:id="@+id/txtMeetPurpose"
+            android:id="@+id/txtinvarea"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="130dp"
+            android:layout_marginLeft="125dp"
             android:layout_marginTop="55dp"
-            android:text="Purpose"
+            android:text="Area"
             android:textSize="15sp"
             android:textColor="@color/white"
             />
@@ -96,18 +96,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="75dp"
-            android:text="Meeting Time:"
+            android:text="Expected Returns:"
             android:textSize="15sp"
             android:textColor="@color/white"
             />
 
         <TextView
-            android:id="@+id/txtMeetTime"
+            android:id="@+id/txtexp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="110dp"
+            android:layout_marginLeft="130dp"
             android:layout_marginTop="75dp"
-            android:text="Time"
+            android:text="Returns"
             android:textSize="15sp"
             android:textColor="@color/white"
             />
@@ -117,47 +117,23 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="95dp"
-            android:text="Created By:"
+            android:text="Investment Duration:"
             android:textSize="15sp"
             android:textColor="@color/white"
             />
 
         <TextView
-            android:id="@+id/txtBy"
+            android:id="@+id/txtDue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="90dp"
+            android:layout_marginLeft="150dp"
             android:layout_marginTop="95dp"
-            android:text="By"
+            android:text="Duration"
             android:textSize="15sp"
             android:textColor="@color/white"
             />
 
-        <Button
-            android:visibility="invisible"
-            android:id="@+id/editButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="250dp"
-            android:layout_marginRight="70dp"
-            android:drawableLeft="@drawable/ic_baseline_edit"
-            android:backgroundTint="@color/white"
-            android:drawableTint="@color/design_default_color_primary"
-            />
 
-        <Button
-            android:visibility="invisible"
-            android:id="@+id/deleteButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="315dp"
-            android:layout_marginRight="10dp"
-            android:drawableLeft="@drawable/ic_baseline_delete_24"
-            android:backgroundTint="@color/white"
-            android:drawableTint="@color/design_default_color_primary"
-            />
 
 
 

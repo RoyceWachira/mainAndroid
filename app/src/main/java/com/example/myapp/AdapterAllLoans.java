@@ -36,7 +36,6 @@ public class AdapterAllLoans extends RecyclerView.Adapter<AdapterAllLoans.MyView
     @Override
     public void onBindViewHolder(AdapterAllLoans.MyViewHolder holder, int position) {
         Loans loans = loansList.get(position);
-
         holder.txtLoanId.setText(loans.getLoanId());
         holder.txtLoanStatus.setText(loans.getLoanStatus());
         holder.txtLoanAmount.setText(loans.getLoanAmount());
@@ -65,6 +64,7 @@ public class AdapterAllLoans extends RecyclerView.Adapter<AdapterAllLoans.MyView
             txtLoanId= itemView.findViewById(R.id.txtLoanId);
             txtLoanStatus= itemView.findViewById(R.id.txtloanStatus);
         }
+
 
     }
 }

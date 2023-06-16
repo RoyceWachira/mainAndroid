@@ -1,5 +1,7 @@
 package com.example.myapp;
 
+import android.view.View;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Members {
@@ -63,6 +65,17 @@ public class Members {
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
+    private int deleteButtonVisibility = View.GONE;
+
+    public void setDeleteButtonVisibility(int visibility) {
+        this.deleteButtonVisibility = visibility;
+    }
+
+    public int getDeleteButtonVisibility() {
+        return deleteButtonVisibility;
+    }
+
 
 
     public void setChamaRole(String chamaRole) {

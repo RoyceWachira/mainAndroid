@@ -1,5 +1,7 @@
 package com.example.myapp;
 
+import android.view.View;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Meetings{
@@ -10,9 +12,10 @@ public class Meetings{
     @SerializedName("meeting_time") private String meetingTime;
     @SerializedName("meeting_date") private String meetingDate;
     @SerializedName("created_by") private String createdBy;
+    @SerializedName("chama_id") private String chamaId;
 
-    public Meetings(String meetingDate, String meetingPurpose, String meetingId,String meetingTime,String meetingVenue,String createdBy) {
-
+    public Meetings(String meetingDate, String meetingPurpose, String meetingId,String meetingTime,String meetingVenue,String createdBy,String chamaId) {
+        this.chamaId=chamaId;
         this.meetingDate=meetingDate;
         this.meetingVenue=meetingVenue;
         this.meetingPurpose=meetingPurpose;
@@ -21,6 +24,7 @@ public class Meetings{
         this.meetingId=meetingId;
     }
 
+    public  String getChamaId(){return  chamaId;}
 
     public String getMeetingPurpose() {
         return meetingPurpose;
@@ -49,5 +53,23 @@ public class Meetings{
         return meetingId;
     }
 
+    private int deleteButtonVisibility = View.GONE;
+    private int editButtonVisibility= View.GONE;
+
+    public void setDeleteButtonVisibility(int visibility) {
+        this.deleteButtonVisibility = visibility;
+    }
+
+    public void seteditButtonVisibility(int visibility) {
+        this.editButtonVisibility = visibility;
+    }
+
+    public int getDeleteButtonVisibility() {
+        return deleteButtonVisibility;
+    }
+
+    public int getEditButtonVisibility() {
+        return editButtonVisibility;
+    }
 
 }

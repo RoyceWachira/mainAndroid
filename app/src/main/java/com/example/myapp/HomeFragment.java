@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -49,6 +50,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<Chamas> chamasList;
+    private CardView card2,card3;
 
     @Nullable
     @Override
@@ -59,6 +61,8 @@ public class HomeFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
+        card2=view.findViewById(R.id.card2);
+        card3=view.findViewById(R.id.card3);
 
         chamasList = new ArrayList<>();
         adapterJoinedChamas = new AdapterjoinedChamas(chamasList, getContext());
@@ -111,6 +115,7 @@ public class HomeFragment extends Fragment {
         });
 
 
+
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,6 +128,35 @@ public class HomeFragment extends Fragment {
             }
 
         });
+
+        SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(getContext());
+        String userRole = sharedPrefManager.getUserRole();
+
+        if (userRole.equals("admin")) {
+            card2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AllChamas allChamas = new AllChamas();
+                    FragmentManager fragmentManager = getParentFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.frame_layout, allChamas);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+            });
+
+            card3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AllUsers allUsers = new AllUsers();
+                    FragmentManager fragmentManager = getParentFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.frame_layout, allUsers);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+            });
+        }
 
         fetchChamasCount();
         fetchUsersCount();

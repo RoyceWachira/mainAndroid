@@ -1,14 +1,18 @@
 package com.example.myapp;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -37,11 +41,28 @@ public class AdapterIndividualFines extends RecyclerView.Adapter<AdapterIndividu
     public void onBindViewHolder(AdapterIndividualFines.MyViewHolder holder, int position) {
         Fines fines = finesList.get(position);
 
+        holder.bind(fines);
         holder.txtFineId.setText(fines.getFineId());
         holder.txtFineStatus.setText(fines.getFineStatus());
         holder.txtFineReason.setText(fines.getFineReason());
         holder.txtFineAmount.setText(fines.getFineAmount());
         holder.txtDate.setText(fines.getDateFined());
+
+        holder.pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PayFineFragment payFineFragment = new PayFineFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("fineId", fines.getFineId());
+                payFineFragment.setArguments(bundle);
+                // Replace the current fragment with the new fragment
+                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.chamaFrameLayout, payFineFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
     }
 
     @Override
@@ -55,8 +76,10 @@ public class AdapterIndividualFines extends RecyclerView.Adapter<AdapterIndividu
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         CardView cardIndividualFines;
         TextView txtFineId,txtFineStatus,txtFineAmount,txtFineReason,txtDate;
+        Button pay;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            pay= itemView.findViewById(R.id.btnPay);
             txtFineAmount= itemView.findViewById(R.id.txtFineAmount);
             txtFineReason= itemView.findViewById(R.id.txtFineReason);
             cardIndividualFines=itemView.findViewById(R.id.cardIndividualFine);
@@ -64,7 +87,14 @@ public class AdapterIndividualFines extends RecyclerView.Adapter<AdapterIndividu
             txtFineStatus= itemView.findViewById(R.id.txtFineStatus);
             txtDate= itemView.findViewById(R.id.txtDateFined);
         }
+        public void bind(Fines fines) {
+            if (fines.getFineStatus().equals("Not Paid") ) {
+                pay.setVisibility(View.VISIBLE);
+            } else {
+                pay.setVisibility(View.GONE);
+            }
 
+        }
     }
 }
 

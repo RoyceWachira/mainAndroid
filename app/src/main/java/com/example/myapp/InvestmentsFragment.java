@@ -1,63 +1,141 @@
 package com.example.myapp;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link InvestmentsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class InvestmentsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public InvestmentsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment InvestmentsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static InvestmentsFragment newInstance(String param1, String param2) {
-        InvestmentsFragment fragment = new InvestmentsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    String chamaId,chamaName,chamaFlow;
+    Integer userId;
+    private CardView investments;
+    private Button btnInvest;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_investments, container, false);
+        View view = inflater.inflate(R.layout.fragment_investments, container, false);
+
+        Bundle arguments = getArguments();
+        if(arguments != null) {
+            chamaId = arguments.getString("chamaId");
+            chamaFlow= arguments.getString("chamaFlow");
+            chamaName= arguments.getString("chamaName");
+        }
+        userId = Integer.parseInt(SharedPrefManager.getInstance(getContext()).getUserId());
+
+        investments= view.findViewById(R.id.cardInvestments);
+        btnInvest= view.findViewById(R.id.btnInvest);
+
+        investments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AllInvestments allInvestments= new AllInvestments();
+                Bundle args = new Bundle();
+                args.putString("chamaId", chamaId);
+                allInvestments.setArguments(args);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.chamaFrameLayout, allInvestments);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        isChairOrVice();
+
+
+        btnInvest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewInvestment newInvestment= new NewInvestment();
+                Bundle args = new Bundle();
+                args.putString("chamaId", chamaId);
+                newInvestment.setArguments(args);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.chamaFrameLayout, newInvestment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+
+
+        return view;
+    }
+
+    private void isChairOrVice() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.URL_IS_CHAIR_OR_VICE+ "?chama_id=" + chamaId+ "&user_id=" + userId, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean error = jsonObject.getBoolean("error");
+                    String message = jsonObject.getString("message");
+
+                    if(error==false){
+                        btnInvest= getView().findViewById(R.id.btnInvest);
+                        btnInvest.setVisibility(View.VISIBLE);
+                    }else{
+                        btnInvest= getView().findViewById(R.id.btnInvest);
+                        btnInvest.setVisibility(View.GONE);
+                    }
+                } catch (JSONException e) {
+                    showToast("Error occurred: " + e.getMessage(), true);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Context context = getContext();
+                showToast(error.getMessage(),true);
+            }
+        });
+
+        Context context = getContext();
+        RequestHandler.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
+    private void showToast(String message, boolean isError) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout;
+
+        if (isError) {
+            layout = inflater.inflate(R.layout.custom_toast_error, getView().findViewById(R.id.toast_message));
+        } else {
+            layout = inflater.inflate(R.layout.custom_toast_success, getView().findViewById(R.id.toast_message));
+        }
+
+        TextView toastMessage = layout.findViewById(R.id.toast_message);
+        toastMessage.setText(message);
+
+        Toast toast = new Toast(getContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
     }
 }

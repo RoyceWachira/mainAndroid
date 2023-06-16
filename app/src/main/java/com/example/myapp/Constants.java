@@ -2,7 +2,7 @@ package com.example.myapp;
 
 public class Constants {
 
-    private static final String ROOT_URL="http://192.168.100.5/Api/";
+    private static final String ROOT_URL="http://172.168.0.213/Api/";
 
     public static final String URL_REGISTER= ROOT_URL+"register.php";
     public static final String URL_LOGIN= ROOT_URL+"login.php";
@@ -53,4 +53,21 @@ public class Constants {
     public static final String URL_UPDATE_CHAMA= ROOT_URL+"updateChama.php";
     public static final String URL_GET_NAME= ROOT_URL+"getName.php";
     public static final String URL_LEAVE_CHAMA= ROOT_URL+"leaveChama.php";
+    public static final String URL_REMOVE_FROM_CHAMA= ROOT_URL+"removeFromChama.php";
+    public static final String URL_PAY_LOAN= ROOT_URL+"payLoan.php";
+    public static final String URL_PAY_FINE= ROOT_URL+"payFine.php";
+    public static final String URL_EDIT_MEETING= ROOT_URL+"updateMeeting.php";
+    public static final String URL_EDIT_LOAN= ROOT_URL+"updateLoan.php";
+    public static final String URL_EDIT_FINE= ROOT_URL+"updateFine.php";
+    public static final String URL_DELETE_LOAN= ROOT_URL+"deleteLoan.php";
+    public static final String URL_DELETE_MEETING= ROOT_URL+"deleteMeeting.php";
+    public static final String URL_DELETE_FINE= ROOT_URL+"deleteFine.php";
+    public static final String URL_GET_MEETING= ROOT_URL+"getMeeting.php";
+    public static final String URL_GET_FINE= ROOT_URL+"getFine.php";
+    public static final String URL_GET_LOAN= ROOT_URL+"getLoan.php";
+    public static final String URL_ALLOCATE= ROOT_URL+"allocateFunds.php";
+    public static final String URL_GET_ALL_ALLOCATIONS= ROOT_URL+"getAllocations.php";
+    public static final String URL_NEW_INVESTMENT= ROOT_URL+"newInvestment.php";
+    public static final String URL_GET_ALL_INVESTMENTS= ROOT_URL+"getallInvestments.php";
+    public static final String URL_GET_ALL_USERS= ROOT_URL+"getallusers.php";
 }

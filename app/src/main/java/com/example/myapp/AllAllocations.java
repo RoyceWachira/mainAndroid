@@ -26,21 +26,21 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllMeetings extends Fragment {
+public class AllAllocations extends Fragment {
 
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private List<Meetings> meetingsList;
-    private AdapterMeetings adapterMeetings;
+    private List<Allocations> allocationsList;
+    private AdapterAllocations adapterAllocations;
     private String chamaId;
     private CardView cardView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_all_meetings, container, false);
+        View view = inflater.inflate(R.layout.fragment_all_allocations, container, false);
 
-        cardView= view.findViewById(R.id.cardViewMeet);
+        cardView= view.findViewById(R.id.cardViewWithdrawals);
 
         Bundle arguments = getArguments();
         if(arguments != null) {
@@ -52,19 +52,19 @@ public class AllMeetings extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        meetingsList = new ArrayList<>();
+        allocationsList = new ArrayList<>();
 
-        adapterMeetings = new AdapterMeetings(meetingsList, getContext());
-        recyclerView.setAdapter(adapterMeetings);
+        adapterAllocations = new AdapterAllocations(allocationsList, getContext());
+        recyclerView.setAdapter(adapterAllocations);
 
-        viewAllMeetings();
+        viewAllAllocations();
 
         return view;
     }
 
-    private void viewAllMeetings() {
+    private void viewAllAllocations() {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.URL_ALL_MEETINGS+ "?chama_id=" + chamaId, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.URL_GET_ALL_ALLOCATIONS+ "?chama_id=" + chamaId, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -74,34 +74,32 @@ public class AllMeetings extends Fragment {
 
                     // Check if the backend response indicates a successful request
                     if (jsonObject.getBoolean("error")==false) {
-                        JSONArray meetingsArray = jsonObject.getJSONArray("allMeetings");
+                        JSONArray allocationsArray = jsonObject.getJSONArray("allallocations");
 
-                        meetingsList.clear();
+                        allocationsList.clear();
 
-                        if (meetingsArray.length() > 0) {
-                            TextView noMeetings = getView().findViewById(R.id.noMeetings);
-                            noMeetings.setVisibility(View.GONE);
+                        if (allocationsArray.length() > 0) {
+                            TextView noallocations = getView().findViewById(R.id.noallocations);
+                            noallocations.setVisibility(View.GONE);
 
-                            for (int i = 0; i < meetingsArray.length(); i++) {
-                                JSONObject meetingsObject = meetingsArray.getJSONObject(i);
+                            for (int i = 0; i < allocationsArray.length(); i++) {
+                                JSONObject allocationsObject = allocationsArray.getJSONObject(i);
 
-                                String date = meetingsObject.getString("meeting_date");
-                                String purpose = meetingsObject.getString("meeting_purpose");
-                                String time= meetingsObject.getString("meeting_time");
-                                String venue = meetingsObject.getString("meeting_venue");
-                                String by = meetingsObject.getString("created_by");
-                                String id = meetingsObject.getString("meeting_id");
-                                String chamaId= meetingsObject.getString("chama_id");
+                                String allocationsAmount = allocationsObject.getString("allocation_amount");
+                                String allocationsDate = allocationsObject.getString("allocation_date");
+                                String allocationsId= String.valueOf(allocationsObject.getInt("allocation_id"));
+                                String memberId = allocationsObject.getString("member_id");
+                                String chamaId = allocationsObject.getString("chama_id");
 
-                                Meetings meetings = new Meetings(date, purpose, id, time, venue,by,chamaId);
-                                meetingsList.add(meetings);
+                                Allocations allocations = new Allocations(memberId, allocationsId, allocationsAmount, allocationsDate, chamaId);
+                                allocationsList.add(allocations);
                             }
 
-                            adapterMeetings.setMeetingsList(meetingsList);
-                            adapterMeetings.notifyDataSetChanged();
+                            adapterAllocations.setAllocationsList(allocationsList);
+                            adapterAllocations.notifyDataSetChanged();
                         }else {
-                            TextView noMeetings = getView().findViewById(R.id.noMeetings);
-                            noMeetings.setVisibility(View.VISIBLE);
+                            TextView nowithdrawals = getView().findViewById(R.id.nowithdrawals);
+                            nowithdrawals.setVisibility(View.VISIBLE);
                             cardView.setVisibility(View.GONE);
                         }
                     }

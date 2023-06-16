@@ -108,6 +108,7 @@ public class EditChama extends Fragment {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.URL_GET_CHAMA+ "?chama_id=" + chamaId, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.d("RES",response);
                 try {
                     // Parse the JSON response
                     JSONObject jsonObject = new JSONObject(response);

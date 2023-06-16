@@ -65,6 +65,10 @@ public class SharedPrefManager {
         return sharedPreferences.getString(KEY_USER_NAME, null);
     }
 
+    public String getUserRole() {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_USER_ROLE, null);
+    }
 
 
 }

@@ -189,6 +189,43 @@ public class ChamaHomeFragment extends Fragment {
 
         });
 
+        if(chamaFlow.equals("linear")) {
+            fab6.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    InvestmentsFragment investmentsFragment = new InvestmentsFragment();
+                    Bundle args = new Bundle();
+                    args.putString("chamaId", chamaId);
+                    args.putString("chamaName", chamaName);
+                    args.putString("chamaFlow", chamaFlow);
+                    investmentsFragment.setArguments(args);
+                    FragmentManager fragmentManager = getParentFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.chamaFrameLayout, investmentsFragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+
+            });
+        }else {
+            fab7.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AllocationsFragment allocationsFragment = new AllocationsFragment();
+                    Bundle args = new Bundle();
+                    args.putString("chamaId", chamaId);
+                    args.putString("chamaName", chamaName);
+                    args.putString("chamaFlow", chamaFlow);
+                    allocationsFragment.setArguments(args);
+                    FragmentManager fragmentManager = getParentFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.chamaFrameLayout, allocationsFragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+
+            });
+        }
         card2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

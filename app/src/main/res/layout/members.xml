@@ -62,13 +62,20 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="250dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="70dp"
             android:drawableLeft="@drawable/ic_baseline_visibility_24"
-            android:text="View"
-            android:textColor="@color/design_default_color_primary"
-            android:textAllCaps="false"
-            android:textSize="13sp"
-            android:textStyle="bold"
+            android:backgroundTint="@color/white"
+            android:drawableTint="@color/design_default_color_primary"
+            />
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="315dp"
+            android:layout_marginRight="10dp"
+            android:drawableLeft="@drawable/ic_baseline_delete_24"
             android:backgroundTint="@color/white"
             android:drawableTint="@color/design_default_color_primary"
             />
